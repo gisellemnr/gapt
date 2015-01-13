@@ -1,0 +1,176 @@
+<!-- This is the common log4j file. It should contain a logger declaration for
+     each logger in gapt sending the messages to nowhere, otherwise it will be
+     sent to root and printed to the console. 
+     Each programmer should have their own (unversioned) copy of this file 
+     (renamed to log4j.xml) and configure which logs they wish to see by changing
+     the respective appender.
+-->
+
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+  <appender name="console" class="org.apache.log4j.ConsoleAppender">
+    <param name="Target" value="System.out"/>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%-5p %c{1} - %m%n"/>
+    </layout>
+  </appender>
+
+  <appender name="nowhere" class="org.apache.log4j.varia.NullAppender"/>
+
+  <!-- Example of a file appender -->
+  <appender name="CutIntroDataLogFile" class="org.apache.log4j.FileAppender">
+    <param name="File" value="logs/CutIntroDataLog.txt"/>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%m%n"/>
+    </layout>
+  </appender>
+  
+  <logger name="CutIntroDataLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+  
+  <logger name="FixSymmetryLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <logger name="MacroRuleLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <logger name="RobinsonToLKLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <logger name="ExpansionTreesMergeLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <logger name="DeltaTableLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <logger name="MiniSATLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <logger name="MiniSATProverLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <logger name="SolveLKLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+  
+  <logger name="EquationRuleLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <logger name="MinimizeSolutionLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <logger name="Prover9Logger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+  
+  <logger name="Prover9ProverLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <logger name="TPTPFOLExporterLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <logger name="SkolemizeLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <logger name="ProjectionsLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <logger name="CeresLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <logger name="DeltasLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <logger name="VeriTParserLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <logger name="MinimalExpansionSequentsLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <logger name="LKtoLKskcLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <logger name="LLKLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <logger name="ReplayLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <logger name="PropositionalProofStrategyLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <logger name="ExpansionTreeProofStrategyLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <logger name="MaxSATLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <logger name="HOL2FOLLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <logger name="StopwatchLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <!-- Root will print to the console every logger that is not declared above 
+       with the flag 'additivity' set to false -->
+  <root>
+    <priority value ="trace" />
+    <appender-ref ref="console" />
+  </root>
+</log4j:configuration>
