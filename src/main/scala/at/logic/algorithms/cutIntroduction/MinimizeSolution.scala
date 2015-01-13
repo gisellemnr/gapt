@@ -19,7 +19,11 @@ import at.logic.utils.executionModels.searchAlgorithms.SearchAlgorithms.DFS
 import at.logic.utils.executionModels.searchAlgorithms.SearchAlgorithms.setSearch
 import at.logic.utils.executionModels.searchAlgorithms.SetNode
 
-object MinimizeSolution extends at.logic.utils.logging.Logger {
+import org.slf4j.LoggerFactory
+
+object MinimizeSolution {
+
+  private val MinimizeSolutionLogger = LoggerFactory.getLogger("MinimizeSolutionLogger")
 
   def apply(ehs: ExtendedHerbrandSequent, prover: Prover) = {
     val minSol = improveSolution(ehs, prover).sortWith((r1,r2) => numOfAtoms(r1) < numOfAtoms(r2)).head
@@ -39,16 +43,16 @@ object MinimizeSolution extends at.logic.utils.logging.Logger {
   // and forgetful paramodulation (i.e. from the forgetful equality consequence generator).
 
   private def improveSolutionEq(ehs: ExtendedHerbrandSequent, prover: Prover) : List[FOLFormula] = {
-    trace("entering improveSolutionEq")
+    MinimizeSolutionLogger.trace("entering improveSolutionEq")
     val cutFormula = ehs.cutFormula
 
     // Remove quantifier 
     val (xs, f) = removeQuantifiers( cutFormula )
 
     // Transform to conjunctive normal form
-    trace( "starting CNF-Transformation" )
+    MinimizeSolutionLogger.trace( "starting CNF-Transformation" )
     val cnf = toCNF(f)
-    trace( "finished CNF-Transformation" )
+    MinimizeSolutionLogger.trace( "finished CNF-Transformation" )
 
     // Exhaustive search over the resolvents (depth-first search),
     // returns the list of all solutions found.
@@ -278,7 +282,7 @@ object MinimizeSolution extends at.logic.utils.logging.Logger {
   // Implements the consequence generator for equality improvement:
   // either forgetful resolution or forgetful paramodulation.
   def oneStepEqualityImprovement(f: FOLFormula) : List[FOLFormula] = {
-    trace("entering oneStepEqualityImprovement")
+    MinimizeSolutionLogger.trace("entering oneStepEqualityImprovement")
     val res = ForgetfulResolve(f) ++ ForgetfulParamodulate(f)
     res
   }
@@ -313,7 +317,7 @@ object MinimizeSolution extends at.logic.utils.logging.Logger {
   def ForgetfulParamodulate(f: FOLFormula) : List[FOLFormula] =
   {
     val res = ForgetfulParamodulateCNF( f ).map( cnf => CNFtoFormula( cnf.toList ) )
-    trace("forgetful paramodulation generated " + res.size + " formulas.")
+    MinimizeSolutionLogger.trace("forgetful paramodulation generated " + res.size + " formulas.")
     res
   }
 
@@ -358,7 +362,7 @@ object MinimizeSolution extends at.logic.utils.logging.Logger {
       getArgs( margs ).map( args => Atom( x, args ) ) - f
     }
   }
-    trace("paramodulants for " + s + " = " + t + " into " + f + " : " + res)
+    MinimizeSolutionLogger.trace("paramodulants for " + s + " = " + t + " into " + f + " : " + res)
     res
   }
 

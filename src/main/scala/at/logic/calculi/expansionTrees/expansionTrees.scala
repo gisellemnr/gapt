@@ -10,6 +10,7 @@ import scala.collection.mutable.ListBuffer
 import at.logic.algorithms.matching.NaiveIncompleteMatchingAlgorithm
 import scala.collection.immutable.HashMap
 
+import org.slf4j.LoggerFactory
 
 /**
  * General class for expansion trees with pseudo case classes including for MergeNodes, which only occur during merging/substituting
@@ -518,7 +519,7 @@ object removeFromExpansionSequent {
 }
 
 
-object substitute extends at.logic.utils.logging.Logger {
+object substitute {
   /**
    * Perform substitution including propagation of merge nodes
    */
@@ -576,7 +577,9 @@ object substitute extends at.logic.utils.logging.Logger {
 
 
 
-object merge extends at.logic.utils.logging.Logger {
+object merge {
+
+  private val ExpansionTreesMergeLogger = LoggerFactory.getLogger("ExpansionTreesMergeLogger")
 
   // Reduces all MergeNodes in the tree
   def apply(tree: ExpansionTreeWithMerges): ExpansionTree = {
@@ -588,7 +591,7 @@ object merge extends at.logic.utils.logging.Logger {
     val (antecedent, succedent) = etSeq
     val allTrees = antecedent ++ succedent
 
-    trace("\n\nmerge seq in: " + antecedent + " |- " + succedent )
+    ExpansionTreesMergeLogger.trace("\n\nmerge seq in: " + antecedent + " |- " + succedent )
 
 
     // apply main to all trees. if a substitution occurs, apply it to all trees and restart whole process as
@@ -597,19 +600,19 @@ object merge extends at.logic.utils.logging.Logger {
       if (index == trees.length) {
         trees
       } else {
-        trace("\n\nmerge on index: "+index+" tree: "+trees(index) +" trees: " + trees)
+        ExpansionTreesMergeLogger.trace("\n\nmerge on index: "+index+" tree: "+trees(index) +" trees: " + trees)
         // define current tree and context, apply main and rebuild later
         val context = trees.take(index) ++ trees.drop(index + 1)
         val curTree = trees(index)
 
-        trace ("old context:"+context)
+        ExpansionTreesMergeLogger.trace ("old context:"+context)
 
         val isAntecedent = index < antecedent.length
         val polarity = if (isAntecedent) false else true
 
         val (newTree, newContext, substitutionOccurred) = main(curTree, polarity, context)
 
-        trace ("new context:"+newContext)
+        ExpansionTreesMergeLogger.trace ("new context:"+newContext)
 
         assert(newContext.length == context.length)
 
@@ -621,7 +624,7 @@ object merge extends at.logic.utils.logging.Logger {
 
     val allNewTrees = applyRec(allTrees, 0).asInstanceOf[Seq[ExpansionTree]]
 
-    trace("merge seq out: " + allNewTrees)
+    ExpansionTreesMergeLogger.trace("merge seq out: " + allNewTrees)
 
     return new ExpansionSequent(
       allNewTrees.take(antecedent.length),
@@ -635,18 +638,18 @@ object merge extends at.logic.utils.logging.Logger {
    */
   private def main(tree: ExpansionTreeWithMerges, polarity: Boolean, context: Seq[ExpansionTreeWithMerges] = Nil, substitutionOccurred: Boolean = false):
   (ExpansionTree, Seq[ExpansionTreeWithMerges], Boolean) = {
-    trace("merge in: " + tree)
-    trace("merge in context: " + context)
+    ExpansionTreesMergeLogger.trace("merge in: " + tree)
+    ExpansionTreesMergeLogger.trace("merge in context: " + context)
 
     val (subst, et) = detectAndMergeMergeNodes(tree, polarity)
     subst match {
       case Some(s) => {
-        trace ("substitution: " + s)
+        ExpansionTreesMergeLogger.trace ("substitution: " + s)
         main(substitute.applyNoMerge(s, et), polarity, context.map(substitute.applyNoMerge(s, _)), substitutionOccurred = true)
       }
       case None => {
-        trace("merge out: " + et)
-        trace("merge out context: " + context)
+        ExpansionTreesMergeLogger.trace("merge out: " + et)
+        ExpansionTreesMergeLogger.trace("merge out context: " + context)
         (et.asInstanceOf[ExpansionTree], context, substitutionOccurred)
       }
 
@@ -719,7 +722,7 @@ object merge extends at.logic.utils.logging.Logger {
    * Call with children of merge node
    */
   private def doApplyMerge(tree1: ExpansionTreeWithMerges, tree2: ExpansionTreeWithMerges, polarity: Boolean): (Option[Substitution], ExpansionTreeWithMerges) = {
-    trace("apply merge called on: \n"+tree1+"\n"+tree2)
+    ExpansionTreesMergeLogger.trace("apply merge called on: \n"+tree1+"\n"+tree2)
 
     // similar as above, code which is required for all binary operators
     def start_op2(s1: ExpansionTreeWithMerges, t1: ExpansionTreeWithMerges,
@@ -750,14 +753,14 @@ object merge extends at.logic.utils.logging.Logger {
       case (Atom(f1), Atom(f2)) /* if f1 == f2 */  => (None, Atom(f1))
 
       case (StrongQuantifier(f1, v1, sel1), StrongQuantifier(f2, v2, sel2)) if f1 == f2 =>
-        trace("encountered strong quantifier "+f1+"; renaming "+v2+" to "+v1)
+        ExpansionTreesMergeLogger.trace("encountered strong quantifier "+f1+"; renaming "+v2+" to "+v1)
         return (Some(Substitution(v2, v1)), StrongQuantifier(f1, v1, MergeNode(sel1, sel2) ))
 
       case (SkolemQuantifier(f1, s1, sel1), SkolemQuantifier(f2, s2, sel2)) if f1 == f2 =>
         val sel2_ = if (s1 != s2) {
           //TODO: we need to replace s2 by s1 in sel2, otherwise the merge operation fails
           //println(, "Can only merge Skolem Quantifier Nodes, if the skolem constants "+s1+" and "+s2+" are the same!")
-          println("Warning: merged skolem quantifiers are not equal - deep formula only valid modulo the equality "+s1+" = "+s2)
+          ExpansionTreesMergeLogger.warn("Warning: merged skolem quantifiers are not equal - deep formula only valid modulo the equality "+s1+" = "+s2)
           (s1, s2) match {
             case (c:HOLConst, d:HOLConst) =>
               replace(d,c,sel2)

@@ -5,7 +5,7 @@ import scala.collection.mutable.{ListBuffer, HashMap => mMap}
 import at.logic.calculi.expansionTrees.{MultiExpansionSequent, MultiExpansionTree, MAnd, MAtom, MOr, MImp, MNeg, MWeakQuantifier, MSkolemQuantifier, MStrongQuantifier}
 import at.logic.utils.dssupport.ListSupport.{listComplements, zipper}
 import at.logic.calculi.expansionTrees.ExpansionSequent
-import at.logic.utils.logging.Logger
+import org.slf4j.LoggerFactory
 
 /**
   * Given an expansion sequent S, this algorithm computes the list of expansion sequents below S that are valid and minimal.
@@ -34,7 +34,9 @@ object minimalExpansionSequents {
  * @param sequent The MultiExpansionSequent to be evaluated.
  * @param prover The prover used for the evaluation.
  */
-private[expansionTrees] class minimalExpansionSequents (val sequent: MultiExpansionSequent, val prover: Prover) extends Logger {
+private[expansionTrees] class minimalExpansionSequents (val sequent: MultiExpansionSequent, val prover: Prover) {
+
+  private val MinimalExpansionSequentsLogger = LoggerFactory.getLogger("MinimalExpansionSequentsLogger")
   
   val maxRemovedInstance = new mMap[MultiExpansionSequent,Int] // This assigns to each MultiExpansionSequent S the maximum of all numbers n with the following property: S can be obtained from a MultiExpansionSequent S' by removing the nth instance of S'.
 
@@ -47,25 +49,25 @@ private[expansionTrees] class minimalExpansionSequents (val sequent: MultiExpans
     val stack = new scala.collection.mutable.Stack[MultiExpansionSequent] // Invariant: the stack only contains valid expansion sequents.
     
     if (prover.isValid(sequent.toDeep)) {
-      debug("The starting sequent is tautological.")
+      MinimalExpansionSequentsLogger.debug("The starting sequent is tautological.")
       stack.push(sequent) // The sequent under consideration is placed on the stack if it is valid.
       maxRemovedInstance += ((sequent, 0)) // The input sequent is assigned number 0 to denote that no instances at all have been removed from it.
     }
     
     while (stack.nonEmpty) {
-      debug("Retrieving sequent from stack")
+      MinimalExpansionSequentsLogger.debug("Retrieving sequent from stack")
       val (current) = stack.pop() // Topmost element of stack is retrieved. We already know it is tautological; only need to consider its successors.
-      trace("Retrieved sequent " + current + ".")
+      MinimalExpansionSequentsLogger.trace("Retrieved sequent " + current + ".")
       val n = maxRemovedInstance(current)
-      trace("Generating successors")
+      MinimalExpansionSequentsLogger.trace("Generating successors")
       val newSequents = generateSuccessors(current) // All successor expansion sequents are generated.
       val m = newSequents.length
-      trace(m + " successors generated")
+      MinimalExpansionSequentsLogger.trace(m + " successors generated")
       var minimal = true // We assume that the current sequent is minimal unless we find a counterexample.
       
       for (i <- 1 to m) { // Iterate over the generated successors
         val s = newSequents(i-1)
-        trace("Testing validity ["+i+"/"+m+"] ...")
+        MinimalExpansionSequentsLogger.trace("Testing validity ["+i+"/"+m+"] ...")
         if (prover.isValid(s.toDeep)) {
           if (i >= n) // This is the core of the optimization: Avoid pushing sequents on the stack multiple times.
             stack.push(s) // Push valid sequents on the stack
@@ -75,11 +77,11 @@ private[expansionTrees] class minimalExpansionSequents (val sequent: MultiExpans
       }
       
       if (minimal) {
-        debug("Sequent is minimal.")
+        MinimalExpansionSequentsLogger.debug("Sequent is minimal.")
         result += current // If the current sequent is minimal, we add it to the results.
       }
       else {
-        debug("Sequent is not minimal.")
+        MinimalExpansionSequentsLogger.debug("Sequent is not minimal.")
       }
     }
     
@@ -99,10 +101,10 @@ private[expansionTrees] class minimalExpansionSequents (val sequent: MultiExpans
 
       // Loop over the antecedent.
       var n = ant.length
-      trace("Generating successor trees for antecedent ...")
+      MinimalExpansionSequentsLogger.trace("Generating successor trees for antecedent ...")
       for (j <- 1 to n) {
         val (tree, fst, snd) = zipper(ant, j) //We iteratively focus each expansion tree in the antecedent of S.
-        trace("["+j+"/"+n+"]")
+        MinimalExpansionSequentsLogger.trace("["+j+"/"+n+"]")
         val newTrees = generateSuccessorTrees(tree) // We generate all successor trees of the current tree.
 
         if (newTrees.isEmpty) { // This can happen for two reasons: the current tree contains no weak quantifiers or all its weak quantifier nodes have only one instance.
@@ -135,10 +137,10 @@ private[expansionTrees] class minimalExpansionSequents (val sequent: MultiExpans
 
       // Loop over the succedent, analogous to the one over the antecedent.
       n = suc.length
-      trace("Generating successor trees for succedent ...")
+      MinimalExpansionSequentsLogger.trace("Generating successor trees for succedent ...")
       for (j <- 1 to n) {
         val (tree, fst, snd) = zipper(suc, j)
-        trace("["+j+"/"+n+"]")
+        MinimalExpansionSequentsLogger.trace("["+j+"/"+n+"]")
         val newTrees = generateSuccessorTrees(tree)
 
         if (newTrees.isEmpty) {

@@ -8,6 +8,7 @@ import at.logic.language.fol.{Equation => FOLEquation, FOLTerm, FOLFormula, FOLE
 import at.logic.calculi.resolution.{FClause, Clause}
 import at.logic.algorithms.lk.{applySubstitution => applySub, CleanStructuralRules, CloneLKProof}
 
+import org.slf4j.LoggerFactory
 
 /**
   Sometimes, we have a resolution refutation of a set of clauses C
@@ -15,14 +16,16 @@ import at.logic.algorithms.lk.{applySubstitution => applySub, CleanStructuralRul
   of symmetry. This algorithm transforms a refutation of C to a refutation
   of C'.
 **/
-object fixSymmetry extends at.logic.utils.logging.Logger {
+object fixSymmetry {
+
+  private val FixSymmetryLogger = LoggerFactory.getLogger("FixSymmetryLogger")
 
   private def getSymmetryMap( to: FClause, from: FSequent ) = {
-    trace("computing symmetry map from " + from + " to " + to)
+    FixSymmetryLogger.trace("computing symmetry map from " + from + " to " + to)
     var err = false
 
     def createMap( from: Seq[FOLFormula], to: Seq[FOLFormula] ) = {
-      trace("computing map from " + from + " to " + to)
+      FixSymmetryLogger.trace("computing map from " + from + " to " + to)
       to.foldLeft( HashMap[FOLFormula, FOLFormula]() )( (map, to_f) => {
         val from_f = from.find( from_f => (from_f == to_f) || ( (from_f, to_f) match
         {
@@ -59,7 +62,7 @@ object fixSymmetry extends at.logic.utils.logging.Logger {
 
   private def applySymm( p: RobinsonResolutionProof, f: FOLFormula, pos: Boolean ) =
   {
-    trace("in apply sym with f = " + f + ", pos = " + pos)
+    FixSymmetryLogger.trace("in apply sym with f = " + f + ", pos = " + pos)
     val (left, right) = f match {
       case FOLEquation(l, r) => (l, r)
     }
@@ -81,7 +84,7 @@ object fixSymmetry extends at.logic.utils.logging.Logger {
   }
 
   private def deriveBySymmetry( to: FClause, from: FSequent ) = {
-    trace("deriving " + to + " from " + from + " by symmetry")
+    FixSymmetryLogger.trace("deriving " + to + " from " + from + " by symmetry")
     val (neg_map, pos_map) = getSymmetryMap( to, from ).get
 
     val init = InitialClause(from.antecedent.map(_.asInstanceOf[FOLFormula]), from.succedent.map(_.asInstanceOf[FOLFormula]))
@@ -99,8 +102,8 @@ object fixSymmetry extends at.logic.utils.logging.Logger {
   private def handleInitialClause( cls: FClause, cs: Seq[FSequent] ) =
     cs.find( c => canDeriveBySymmetry( cls, c ) ) match {
       case None => {
-        trace("Could not find a clause which is equal to this clause modulo symmetry: " + cls)
-        trace("Clause set: " + cs)
+        FixSymmetryLogger.trace("Could not find a clause which is equal to this clause modulo symmetry: " + cls)
+        FixSymmetryLogger.trace("Clause set: " + cs)
         InitialClause(cls)
       }
       case Some( c ) => {
@@ -138,8 +141,8 @@ object fixSymmetry extends at.logic.utils.logging.Logger {
   }
   (res.root.positive ++ res.root.negative).foreach( fo => assert(fo.formula.isInstanceOf[FOLFormula]))
   if (fac) {
-    trace("old: " + p.root)
-    trace("new: " + res.root)
+    FixSymmetryLogger.trace("old: " + p.root)
+    FixSymmetryLogger.trace("new: " + res.root)
   }
   res
 }

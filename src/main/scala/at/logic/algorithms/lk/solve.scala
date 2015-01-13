@@ -10,10 +10,14 @@ import at.logic.language.lambda.types.{Ti, Tindex}
 import at.logic.language.schema.{Substitution => SubstitutionSchema, SchemaVar, SchemaExpression, SchemaFormula, BigAnd, BigOr, IntVar, Pred, Or => OrSchema, And => AndSchema}
 import at.logic.provers.Prover
 
+import org.slf4j.LoggerFactory
+
 /**
  * Constructs proofs sequents. Currently supports propositional logic as well as proof construction using expansion trees.
  */
-object solve extends at.logic.utils.logging.Logger {
+object solve {
+
+  private val SolveLKLogger = LoggerFactory.getLogger("SolveLKLogger")
 
   /**
    * Main method for solving propositional sequents
@@ -23,10 +27,10 @@ object solve extends at.logic.utils.logging.Logger {
    * @return a proof if there is one
    */
   def solvePropositional(seq: FSequent, cleanStructuralRules: Boolean = true, throwOnError: Boolean = false): Option[LKProof] = {
-    debug("running solvePropositional")
+    SolveLKLogger.debug("running solvePropositional")
 
     if (SolveUtils.noCommonAtoms(seq)) {
-      trace("no common atoms: " + seq)
+      SolveLKLogger.trace("no common atoms: " + seq)
       None
     }
 
@@ -38,7 +42,7 @@ object solve extends at.logic.utils.logging.Logger {
    * "Solving" for FOL: Use instances from expansion sequent to create LK proof for a sequent
    */
   def expansionProofToLKProof(seq: FSequent, expansionSequent: ExpansionSequent, cleanStructuralRules: Boolean = true, throwOnError: Boolean = false): Option[LKProof] = {
-    debug( "\nrunning expansionProofToLKProof" )
+    SolveLKLogger.debug( "\nrunning expansionProofToLKProof" )
     startProving(seq,  new ExpansionTreeProofStrategy(expansionSequent), cleanStructuralRules, throwOnError)
   }
 
@@ -48,7 +52,7 @@ object solve extends at.logic.utils.logging.Logger {
 
     prove(seq_norm, strategy) match {
       case Some(p) => {
-        debug("finished proof successfully")
+        SolveLKLogger.debug("finished proof successfully")
         //val pWithWeakening = addWeakenings(p, seq)
         val pWithWeakening = WeakeningMacroRule(p, seq)
         Some(if (cleanStructuralRules) CleanStructuralRules(pWithWeakening) else pWithWeakening)
@@ -67,11 +71,11 @@ object solve extends at.logic.utils.logging.Logger {
     val ant_set = seq.antecedent.toSet
     val suc_set = seq.succedent.toSet
     if (( ant_set.size != seq.antecedent.size ) || ( suc_set.size != seq.succedent.size )) {
-      debug( "proving a sequent which is not set-normalized" )
+      SolveLKLogger.debug( "proving a sequent which is not set-normalized" )
     }
 
-    trace("proving: "+seq)
-    trace("with strat: "+strategy)
+    SolveLKLogger.trace("proving: "+seq)
+    SolveLKLogger.trace("with strat: "+strategy)
 
     if (SolveUtils.isAxiom(seq)) {
       val (f, rest) = SolveUtils.getAxiomfromSeq(seq)
@@ -85,12 +89,12 @@ object solve extends at.logic.utils.logging.Logger {
 
     else {
 
-      trace("no axiom, calc next step")
+      SolveLKLogger.trace("no axiom, calc next step")
 
       // main step: ask strategy what to do
       strategy.calcNextStep(seq) match {
         case Some(action) => {
-          trace("strategy has selected: " + action + " action.form: " + action.formula + "\n")
+          SolveLKLogger.trace("strategy has selected: " + action + " action.form: " + action.formula + "\n")
 
           // dumbly apply whatever rule matches to this formula
           action.loc match {
@@ -559,7 +563,10 @@ object ProofStrategy {
   }
 }
 
-class PropositionalProofStrategy extends ProofStrategy with at.logic.utils.logging.Logger {
+class PropositionalProofStrategy extends ProofStrategy {
+
+  private val PropositionalProofStrategyLogger = LoggerFactory.getLogger("PropositionalProofStrategyLogger")
+
   val FormulaLocation = ProofStrategy.FormulaLocation // shortcut
 
   override def calcNextStep(seq: FSequent): Option[ProofStrategy.Action] = {
@@ -575,7 +582,7 @@ class PropositionalProofStrategy extends ProofStrategy with at.logic.utils.loggi
           findBinaryLeft(seq).orElse(
             findBinaryRight(seq).orElse(
               {
-                debug("PropositionalProofStrategy is unable to find a rule to apply on: "+seq)
+                PropositionalProofStrategyLogger.debug("PropositionalProofStrategy is unable to find a rule to apply on: "+seq)
                 None
               }
             )
@@ -614,7 +621,9 @@ class PropositionalProofStrategy extends ProofStrategy with at.logic.utils.loggi
 
 }
 
-class ExpansionTreeProofStrategy(val expansionSequent: ExpansionSequent) extends PropositionalProofStrategy with at.logic.utils.logging.Logger {
+class ExpansionTreeProofStrategy(val expansionSequent: ExpansionSequent) extends PropositionalProofStrategy {
+
+  private val ExpansionTreeProofStrategyLogger = LoggerFactory.getLogger("ExpansionTreeProofStrategyLogger")
 
   override def toString(): String = "ExpansionTreeProofStrategy("+expansionSequent+")"
 
@@ -634,7 +643,7 @@ class ExpansionTreeProofStrategy(val expansionSequent: ExpansionSequent) extends
               findBinaryLeft(seq).orElse(
                 findBinaryRight(seq).orElse(
                   {
-                    debug("ExpansionTreeProofStrategy is unable to find a rule to apply on: " + seq)
+                    ExpansionTreeProofStrategyLogger.debug("ExpansionTreeProofStrategy is unable to find a rule to apply on: " + seq)
                     None
                   }
                 )
@@ -722,7 +731,7 @@ class ExpansionTreeProofStrategy(val expansionSequent: ExpansionSequent) extends
     }).map(formula => formula match {
       // differentiate again between Imp and Or as formulas appear in different locations when proving
       case Imp(_, _) => {
-        debug("found imp; exp seq: " + expansionSequent + "; form: " + formula)
+        ExpansionTreeProofStrategyLogger.debug("found imp; exp seq: " + expansionSequent + "; form: " + formula)
         val et = getETOfFormula(expansionSequent, formula, isAntecedent=true).get
         val children = et.asInstanceOf[BinaryExpansionTree].children // children are Tuple2(ET, Option[Formula])
         val etSeqPurged = expansionSequent.removeFromAntecedent(et)

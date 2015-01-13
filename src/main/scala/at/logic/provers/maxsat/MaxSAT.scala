@@ -11,6 +11,7 @@ import at.logic.utils.logging.Stopwatch
 import scala.collection.immutable.Map
 import scala.collection.mutable
 import scala.sys.process.{Process, ProcessIO}
+import org.slf4j.LoggerFactory
 
 // This is also occuring in the minisat package
 trait Interpretation {
@@ -68,7 +69,9 @@ object MaxSATSolver extends Enumeration{
 
 // Call a MaxSAT solver to solve partial weighted MaxSAT instances
 // by using command shell
-class MaxSAT(solver: MaxSATSolver) extends at.logic.utils.logging.Logger {
+class MaxSAT(solver: MaxSATSolver) {
+
+  private val MaxSATLogger = LoggerFactory.getLogger("MaxSATLogger")
 
   // the binaries of the specific MaxSATSolvers
   val qmaxsatbin = "qmaxsat"
@@ -92,12 +95,12 @@ class MaxSAT(solver: MaxSATSolver) extends at.logic.utils.logging.Logger {
       }
     } catch  {
       case ex: IOException => {
-        warn("It seems that "+solver+" is not installed properly")
+        MaxSATLogger.warn("It seems that "+solver+" is not installed properly")
         solver match {
-          case MaxSATSolver.QMaxSAT => warn("Please put the qmaxsat binary (available at https://sites.google.com/site/qmaxsat/) into PATH")
-          case MaxSATSolver.ToySAT => warn("Please put the toysat binary (available at https://github.com/msakai/toysolver) into PATH")
-          case MaxSATSolver.ToySolver => warn("Please put the toysolver binary (available at https://github.com/msakai/toysolver) into PATH")
-          case MaxSATSolver.MiniMaxSAT => warn("Please put the minimaxsat binary (available at https://github.com/izquierdo/tesis_postgrado/tree/master/src/MiniMaxSat) into PATH")
+          case MaxSATSolver.QMaxSAT => MaxSATLogger.warn("Please put the qmaxsat binary (available at https://sites.google.com/site/qmaxsat/) into PATH")
+          case MaxSATSolver.ToySAT => MaxSATLogger.warn("Please put the toysat binary (available at https://github.com/msakai/toysolver) into PATH")
+          case MaxSATSolver.ToySolver => MaxSATLogger.warn("Please put the toysolver binary (available at https://github.com/msakai/toysolver) into PATH")
+          case MaxSATSolver.MiniMaxSAT => MaxSATLogger.warn("Please put the minimaxsat binary (available at https://github.com/izquierdo/tesis_postgrado/tree/master/src/MiniMaxSat) into PATH")
         }
         return false
       }
@@ -114,21 +117,21 @@ class MaxSAT(solver: MaxSATSolver) extends at.logic.utils.logging.Logger {
    */
   def solvePWM( hard: Set[FOLFormula], soft: Set[Tuple2[FOLFormula, Int]], watch: Stopwatch = new Stopwatch() ) : Option[MapBasedInterpretation] = {
 
-    debug("Generating clauses...")
+    MaxSATLogger.debug("Generating clauses...")
 
     // Hard CNF transformation
     watch.start()
     val hardCNF = TseitinCNF(And(hard.toList))._1
     val hardCNFTime = watch.lap("hardCNF")
     logTime("[Runtime]<hard CNF-Generation> ",hardCNFTime)
-    trace("produced hard cnf: " + hardCNF)
+    MaxSATLogger.trace("produced hard cnf: " + hardCNF)
 
     // Soft CNF transformation
     watch.start()
     val softCNFs = soft.map(s => CNFp(s._1).map(f => (f, s._2))).flatten
     val softCNFTime = watch.lap("softCNF")
     logTime("[Runtime]<soft CNF-Generation> ",softCNFTime)
-    trace("produced soft cnf: " + softCNFs)
+    MaxSATLogger.trace("produced soft cnf: " + softCNFs)
 
     watch.start()
     val interpretation = solve( hardCNF, softCNFs )
@@ -224,7 +227,7 @@ class MaxSAT(solver: MaxSATSolver) extends at.logic.utils.logging.Logger {
     val sec = (millisec / 1000) % 60
     val minutes = ((millisec / 1000) / 60) % 60
     val hours = (((millisec / 1000) / 60) / 60 )
-    debug(msg + " " + hours + "h " + minutes + "min " + sec + "sec " + msec + "msec")
+    MaxSATLogger.debug(msg + " " + hours + "h " + minutes + "min " + sec + "sec " + msec + "msec")
   }
 
   /**
@@ -238,7 +241,7 @@ class MaxSAT(solver: MaxSATSolver) extends at.logic.utils.logging.Logger {
    */
   private def getFromMaxSAT( hard: Set[FClause], soft: Set[Tuple2[FClause,Int]] ) :  Option[Map[FOLFormula, Boolean]] =
   {
-    debug("Generating wcnf file...")
+    MaxSATLogger.debug("Generating wcnf file...")
     val startTimeGenerate = System.currentTimeMillis()
     val clauses = soft.foldLeft(hard)((acc,c) => acc + c._1)
     updateAtoms(clauses)
@@ -252,7 +255,7 @@ class MaxSAT(solver: MaxSATSolver) extends at.logic.utils.logging.Logger {
     }
     else{
       top = soft.foldLeft(0)((acc,x) => acc + x._2) + 1
-      debug("TOP: "+top)
+      MaxSATLogger.debug("TOP: "+top)
       sb.append("p wcnf " + atom_map.size + " "  + clauses.size + " " + top + nl)
     }
 
@@ -298,7 +301,7 @@ class MaxSAT(solver: MaxSATSolver) extends at.logic.utils.logging.Logger {
     // run maxsat
 
     //val run = pathToBinary + " " + temp_in.getAbsolutePath() + " " + temp_out.getAbsolutePath();
-    debug("Starting maxsat...")
+    MaxSATLogger.debug("Starting maxsat...")
     val startTimeMaxSAT = System.currentTimeMillis()
 
     var options = mutable.MutableList[String]()
@@ -318,7 +321,7 @@ class MaxSAT(solver: MaxSATSolver) extends at.logic.utils.logging.Logger {
       }
     }
 
-    debug("Command: "+command)
+    MaxSATLogger.debug("Command: "+command)
     var output = new StringBuilder()
     var error = new StringBuilder()
     val processIO = new ProcessIO(
@@ -342,14 +345,14 @@ class MaxSAT(solver: MaxSATSolver) extends at.logic.utils.logging.Logger {
       }
     }
 
-    debug("Exit Value = " + value)
-    debug("maxsat finished");
+    MaxSATLogger.debug("Exit Value = " + value)
+    MaxSATLogger.debug("maxsat finished");
     logTime("[Runtime]<maxsat> ", (System.currentTimeMillis()-startTimeMaxSAT))
 
-    trace("IN_FILE:\n"+TextFileSlurper(temp_in));
+    MaxSATLogger.trace("IN_FILE:\n"+TextFileSlurper(temp_in));
     //debug("OUT_FILE:\n"+TextFileSlurper(temp_out));
-    trace("OUT:\n"+output.toString);
-    trace("ERR:\n"+error.toString);
+    MaxSATLogger.trace("OUT:\n"+output.toString);
+    MaxSATLogger.trace("ERR:\n"+error.toString);
     // parse maxsat output and construct map
     val in = new BufferedReader(new InputStreamReader(
       new FileInputStream(stdout)));
@@ -397,11 +400,11 @@ class MaxSAT(solver: MaxSATSolver) extends at.logic.utils.logging.Logger {
       case None => None
       case Some(str) => {
         var weight = str.split(" ")(1).toInt
-        debug("weight: "+weight)
+        MaxSATLogger.debug("weight: "+weight)
         (vLinePattern findFirstIn in) match{
           case None => None
           case Some(vline) => {
-            trace("model: " + vline)
+            MaxSATLogger.trace("model: " + vline)
             Some(vline.split(" ").
               filter(lit => !lit.equals("") && !lit.equals("v") && !lit.charAt(0).equals('0')).
               map(lit =>

@@ -3,7 +3,6 @@
 package at.logic.transformations.skolemization.lksk
 
 import at.logic.calculi.lk.base.{FSequent, LKProof, Sequent}
-import at.logic.utils.logging.Logger
 import scala.collection.mutable.{Map,HashMap}
 import at.logic.calculi.lksk._
 import at.logic.calculi.lk.{Axiom => LKAxiom, WeakeningLeftRule => LKWeakeningLeftRule, WeakeningRightRule => LKWeakeningRightRule, _}
@@ -18,8 +17,12 @@ import at.logic.language.lambda.symbols.StringSymbol
 import at.logic.language.lambda.types.FunctionType
 import at.logic.algorithms.llk.HybridLatexExporter
 
+import org.slf4j.LoggerFactory
 
-object LKtoLKskc extends Logger {
+object LKtoLKskc {
+
+  private val LKtoLKskcLogger = LoggerFactory.getLogger("LKtoLKskcLogger")
+
   def fo2occ(f:HOLFormula) = factory.createFormulaOccurrence(f, Nil)
 
   def apply(proof: LKProof) : LKProof = apply( proof, getCutAncestors( proof ) )
@@ -80,7 +83,7 @@ object LKtoLKskc extends Logger {
         m.formula match {
           case AllVar(HOLVar(_,alpha), _) =>
             val f = HOLConst(getFreshSkolemFunctionSymbol, FunctionType(alpha, args.map(_.exptype)))
-            debug( "Using Skolem function symbol '" + f + "' for formula " + m.formula )
+            LKtoLKskcLogger.debug( "Using Skolem function symbol '" + f + "' for formula " + m.formula )
             val s = Function( f, args )
             val subst = Substitution( v, s )
             val new_parent = applySubstitution( r._1, subst )
@@ -112,7 +115,7 @@ object LKtoLKskc extends Logger {
         m.formula match {
           case ExVar(HOLVar(_,alpha), _) =>
             val f = HOLConst(getFreshSkolemFunctionSymbol, FunctionType(alpha, args.map(_.exptype)))
-            debug( "Using Skolem function symbol '" + f + "' for formula " + m.formula )
+            LKtoLKskcLogger.debug( "Using Skolem function symbol '" + f + "' for formula " + m.formula )
             val s = Function( f, args )
             val subst = Substitution( v, s )
             val new_parent = applySubstitution( r._1, subst )

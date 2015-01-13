@@ -37,7 +37,7 @@ import at.logic.transformations.herbrandExtraction.extractExpansionTrees
  * see compressAll for how to call specific tests
  **********/
 
-val CutIntroDataLogger = LoggerFactory.getLogger("CutIntroDataLogger$")
+val CutIntroDataLogger = LoggerFactory.getLogger("CutIntroDataLogger")
 
 /*
  * Each log line is a tuple consisting in the following values in this order:
@@ -70,7 +70,7 @@ val CutIntroDataLogger = LoggerFactory.getLogger("CutIntroDataLogger$")
  *   </layout>
  * </appender>
  *
- * <logger name="CutIntroDataLogger$">
+ * <logger name="CutIntroDataLogger">
  *   <level value="trace"/>
  *   <appender-ref ref="CutIntroDataLogFile"/>
  * </logger>

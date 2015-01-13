@@ -15,7 +15,12 @@ import at.logic.language.hol
 import scala.collection.mutable
 import at.logic.language.lambda.LambdaExpression
 
-object TPTPFOLExporter extends at.logic.utils.logging.Logger {
+import org.slf4j.LoggerFactory
+
+object TPTPFOLExporter {
+
+  private val TPTPFOLExporterLogger = LoggerFactory.getLogger("TPTPFOLExporterLogger")
+
   // FIXME: this should not be here!
   def hol2fol(f: HOLFormula) : FOLFormula = 
   {
@@ -48,13 +53,13 @@ object TPTPFOLExporter extends at.logic.utils.logging.Logger {
   def export( s: FSequent ) = {
     val f = reduceHolToFol(s.toFormula)
     val map = getVarRenaming( f )
-    trace("var renaming: " + map)
+    TPTPFOLExporterLogger.trace("var renaming: " + map)
     tptp( f )( map )
   }
 
   def exportFormula( f: FOLFormula ) = {
     val map = getVarRenaming( f )
-    trace("var renaming for " + f + ": " + map)
+    TPTPFOLExporterLogger.trace("var renaming for " + f + ": " + map)
     tptpFormula( f )( map )
   }
 

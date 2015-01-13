@@ -23,7 +23,6 @@ import at.logic.parsing.language.tptp.TPTPFOLExporter
 import at.logic.provers.Prover
 import at.logic.provers.prover9.commands.InferenceExtractor
 import java.io._
-import at.logic.utils.logging.Logger
 import org.slf4j.LoggerFactory
 
 import scala.sys.process._
@@ -33,12 +32,14 @@ import scala.util.matching.Regex
 
 class Prover9Exception(msg: String) extends Exception(msg)
 
-object Prover9 extends at.logic.utils.logging.Logger {
+object Prover9 {
+
+  private val Prover9Logger = LoggerFactory.getLogger("Prover9Logger")
 
   private def writeProofProblem( seq: FSequent, file: File ) =
   {
     val tptp = TPTPFOLExporter.tptp_proof_problem( seq )
-    trace("created tptp input: " + tptp)
+    Prover9Logger.trace("created tptp input: " + tptp)
     val writer = new FileWriter( file )
     writer.write( tptp )
     writer.flush
@@ -47,7 +48,7 @@ object Prover9 extends at.logic.utils.logging.Logger {
   private def writeRefutationProblem( named_sequents: List[Tuple2[String, FSequent]], file: File ) =
   {
     val tptp = TPTPFOLExporter.tptp_problem_named( named_sequents )
-    trace("created tptp input: " + tptp)
+    Prover9Logger.trace("created tptp input: " + tptp)
     val writer = new FileWriter( file )
     writer.write( tptp )
     writer.flush
@@ -118,15 +119,15 @@ object Prover9 extends at.logic.utils.logging.Logger {
   }
 
   private def isValid( input_file: String, output_file: String ) : Boolean = {
-    trace( "running prover9" )
+    Prover9Logger.trace( "running prover9" )
     val ret = runP9( input_file, output_file )
-    trace( "prover9 finished" )
+    Prover9Logger.trace( "prover9 finished" )
     ret match {
       case 0 =>  // prover9 ran successfully
         return true
       case 1 => throw new Prover9Exception("A fatal error occurred (user's syntax error or Prover9's bug).")
       case 2 => {
-        trace("Prover9 ran out of things to do (sos list exhausted).")
+        Prover9Logger.trace("Prover9 ran out of things to do (sos list exhausted).")
         // Sometimes, prover9 returns with this exit code even though
         // a proof has been found. 
         //
@@ -172,9 +173,9 @@ object Prover9 extends at.logic.utils.logging.Logger {
   private def refuteNamed( named_sequents : List[Tuple2[String, FSequent]], input_file: String, output_file: String ) : Option[RobinsonResolutionProof] =
   {
     val tmp_file = File.createTempFile( "gapt-prover9-ref", ".tptp", null )
-    trace("writing refutational problem")
+    Prover9Logger.trace("writing refutational problem")
     writeRefutationProblem( named_sequents, tmp_file )
-    trace("converting tptp to ladr")
+    Prover9Logger.trace("converting tptp to ladr")
     tptpToLadr( tmp_file.getAbsolutePath, input_file )
     tmp_file.delete
     runP9OnLADR(input_file, output_file, Some(named_sequents.map( p => p._2) ))
@@ -194,21 +195,21 @@ object Prover9 extends at.logic.utils.logging.Logger {
         case _ => m
     })
 
-    trace( "translation map: " )
-    trace( symbol_map.toString )
+    Prover9Logger.trace( "translation map: " )
+    Prover9Logger.trace( symbol_map.toString )
 
-    trace( "running prover9" )
+    Prover9Logger.trace( "running prover9" )
     val ret = runP9( input_file, output_file )
-    trace( "prover9 finished" )
+    Prover9Logger.trace( "prover9 finished" )
     ret match {
       case 0 =>
         try  {
-          trace( "parsing prover9 to robinson" )
+          Prover9Logger.trace( "parsing prover9 to robinson" )
           val p9proof = parse_prover9(output_file)
-          trace( "done parsing prover9 to robinson" )
-          trace( "doing name replacement" )
+          Prover9Logger.trace( "done parsing prover9 to robinson" )
+          Prover9Logger.trace( "doing name replacement" )
           val tp9proof = NameReplacement(p9proof._1, symbol_map)
-          trace( "done doing name replacement" )
+          Prover9Logger.trace( "done doing name replacement" )
           /*
           trace("Proof size: "+tp9proof.size)
           for (fs <- tp9proof.nodes.map(_.vertex.asInstanceOf[Clause].toFSequent);
@@ -218,10 +219,10 @@ object Prover9 extends at.logic.utils.logging.Logger {
           }
           */
 
-          trace("CS size: "+clauses.getOrElse(Seq()).size)
+          Prover9Logger.trace("CS size: "+clauses.getOrElse(Seq()).size)
           for (fs <- clauses.getOrElse(Seq());
                f <- fs.formulas) {
-            trace("Checking cs formula "+f)
+            Prover9Logger.trace("Checking cs formula "+f)
             require(f.isInstanceOf[FOLFormula], "Formula "+f+" in "+fs+" is not a FOL formula!")
           }
           val ret = if (clauses != None) fixSymmetry(tp9proof, clauses.get) else tp9proof
@@ -230,15 +231,15 @@ object Prover9 extends at.logic.utils.logging.Logger {
           Some(ret)
         } catch {
           case e : Exception =>
-            debug("Prover9 run successfully but conversion to resolution proof failed! " + e.getMessage)
+            Prover9Logger.debug("Warning: Prover9 run successfully but conversion to resolution proof failed! " + e.getMessage)
             val stackelements = e.getStackTrace
             for (ste <- stackelements)
-              trace(ste.getFileName + ":"+ ste.getLineNumber +" " + ste.getClassName+"."+ste.getMethodName)
+              Prover9Logger.trace(ste.getFileName + ":"+ ste.getLineNumber +" " + ste.getClassName+"."+ste.getMethodName)
             Some(InitialClause(Nil,Nil))
         }
       case 1 => throw new Prover9Exception("A fatal error occurred (user's syntax error or Prover9's bug).")
       case 2 => {
-        trace("Prover9 ran out of things to do (sos list exhausted).")
+        Prover9Logger.trace("Prover9 ran out of things to do (sos list exhausted).")
         // Sometimes, prover9 returns with this exit code even though
         // a proof has been found. Hack-ish solution: Try to parse, if
         // we fail, we assume that no proof was actually produced.
@@ -247,38 +248,38 @@ object Prover9 extends at.logic.utils.logging.Logger {
         // and handle it here.
         // 
         try {
-          trace( "parsing prover9 to robinson" )
+          Prover9Logger.trace( "parsing prover9 to robinson" )
           val p9proof = parse_prover9(output_file)
-          trace( "done parsing prover9 to robinson" )
-          trace( "doing name replacement" )
+          Prover9Logger.trace( "done parsing prover9 to robinson" )
+          Prover9Logger.trace( "doing name replacement" )
           val tp9proof = NameReplacement(p9proof._1, symbol_map)
 
-          trace( "done doing name replacement" )
+          Prover9Logger.trace( "done doing name replacement" )
           val ret = if (clauses != None) fixSymmetry(tp9proof, clauses.get) else tp9proof
-          trace( "done fixing symmetry" )
+          Prover9Logger.trace( "done fixing symmetry" )
           Some(ret)
         } catch {
           case _: Exception => None // Prover9 ran out of things to do (sos list exhausted).
         }
       }
       case 3 => {
-        trace("The max_megs (memory limit) parameter was exceeded.")
+        Prover9Logger.trace("The max_megs (memory limit) parameter was exceeded.")
         None // The max_megs (memory limit) parameter was exceeded.
         }
       case 4 => {
-        trace("The max_seconds parameter was exceeded.")
+        Prover9Logger.trace("The max_seconds parameter was exceeded.")
         None // The max_seconds parameter was exceeded.
       }
       case 5 => {
-        trace("The max_given parameter was exceeded.")
+        Prover9Logger.trace("The max_given parameter was exceeded.")
         None // The max_given parameter was exceeded.
       }
       case 6 => {
-        trace("The max_kept parameter was exceeded.")
+        Prover9Logger.trace("The max_kept parameter was exceeded.")
         None // The max_kept parameter was exceeded.
       }
       case 7 => {
-        trace("A Prover9 action terminated the search.")
+        Prover9Logger.trace("A Prover9 action terminated the search.")
         None // A Prover9 action terminated the search.
       }
       case 101 => throw new Prover9Exception("Prover9 received an interrupt signal.")
@@ -341,8 +342,6 @@ object Prover9 extends at.logic.utils.logging.Logger {
     val ivy_file = File.createTempFile( "gapt-prover9", ".ivy", null )
     p9_to_ivy(pt_file.getCanonicalPath, ivy_file.getCanonicalPath)
 
-    def debugline(s:String) = { debug(s); true}
-
     val iproof = IvyParser(ivy_file.getCanonicalPath, IvyStyleVariables)
     val rproof = IvyToRobinson(iproof)
 
@@ -396,7 +395,10 @@ object Prover9 extends at.logic.utils.logging.Logger {
 
 }
 
-class Prover9Prover extends Prover with at.logic.utils.logging.Logger {
+class Prover9Prover extends Prover {
+
+  private val Prover9ProverLogger = LoggerFactory.getLogger("Prover9ProverLogger")
+
   def getRobinsonProof( seq : FSequent ) = Prover9.prove(seq)
 
   /** 
@@ -420,11 +422,11 @@ class Prover9Prover extends Prover with at.logic.utils.logging.Logger {
    
     getRobinsonProof(gseq) match {
       case Some(proof) => {
-        trace(" got a robinson proof from prover9, translating ")
+        Prover9ProverLogger.trace(" got a robinson proof from prover9, translating ")
         Some(unground( RobinsonToLK(proof,gseq), map) )
       }
       case None => {
-        trace(" proving with prover9 failed ")
+        Prover9ProverLogger.trace(" proving with prover9 failed ")
         None
       }
     }
@@ -439,8 +441,8 @@ class Prover9Prover extends Prover with at.logic.utils.logging.Logger {
     // FIXME: make a better association between the consts and the vars.
     //val map = free.zip( free.map( v => new FOLConst( new CopySymbol( v.name ) ) ) ).toMap
     val map = free.zip( free.map( v => new FOLConst(v.sym) ) ).toMap
-    trace( "grounding map in prover9: ")
-    trace( map.toString )
+    Prover9ProverLogger.trace( "grounding map in prover9: ")
+    Prover9ProverLogger.trace( map.toString )
     // FIXME: cast of formula of sequent!
     val subst = Substitution(map)
     val ret = FSequent( seq.antecedent.map( f => subst(f.asInstanceOf[FOLFormula]) ),

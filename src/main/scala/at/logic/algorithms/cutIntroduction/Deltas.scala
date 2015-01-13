@@ -19,9 +19,9 @@ import at.logic.provers.prover9.Prover9Prover
 import at.logic.transformations.herbrandExtraction.extractExpansionTrees
 import at.logic.utils.dssupport.ListSupport._
 import at.logic.utils.executionModels.timeout._
-import at.logic.utils.logging.Logger
 
 import scala.collection.immutable.HashMap
+import org.slf4j.LoggerFactory
 
 /** Represents the vector Delta(t_1,...,t_n), i.e. one row of the Delta-table
   * (for details, see gapt/doc/deltavector.tex, Chapter "Generalized Delta-Vector").
@@ -42,8 +42,9 @@ trait DeltaVector {
 
 /** Contains the implementations for the various delta-vectors.
   */
-object Deltas extends Logger {
+object Deltas {
 
+  private val DeltasLogger = LoggerFactory.getLogger("DeltasLogger")
 
   /** The delta-vector which uses at most one variable in its decompositions.
     *
@@ -236,7 +237,7 @@ object Deltas extends Logger {
     * The variables in the returned decompositions will be named 
     * [eigenvariable]_0,...
     */
-  class UnboundedVariableDelta extends DeltaVector with Logger {
+  class UnboundedVariableDelta extends DeltaVector {
     /** Computes Delta_G(t_1,...,t_n) for a list of terms t_1,...,t_n
       * and returns (u;s_1,...s_q) where u is a term containing the variables α_1,...,α_q
       * and the lists s_1,...,s_q are the values which must be substituted for these α to
@@ -271,9 +272,9 @@ object Deltas extends Logger {
       */
     private def computeDg(terms: List[FOLTerm], eigenvariable: String, curInd: Int) : (types.RawDecomposition,Int) = {
 
-      trace("----------- entering computeDg.")
-      trace("   terms: " + terms)
-      trace("   curInd: " + curInd)
+      DeltasLogger.trace("----------- entering computeDg.")
+      DeltasLogger.trace("   terms: " + terms)
+      DeltasLogger.trace("   curInd: " + curInd)
 
       //Special case: only one term has been provided. This isn't part of
       //the definition of DeltaG in the paper (deltavector.tex), but
@@ -314,7 +315,7 @@ object Deltas extends Logger {
           //computePart naively increased newInd, but nub reduces the number of variables again
           //val nubbedInd = largestVarInU(eigenvariable, u)
 
-          trace("final (u | S): " + u + " | " + s)
+          DeltasLogger.trace("final (u | S): " + u + " | " + s)
           //trace("newInd(" + (if (nubbedInd.nonEmpty) "exists" else "does not exist") + "): " + (if (nubbedInd.nonEmpty) nubbedInd.get + 1 else curInd))
 
           //((u,s), if (nubbedInd.nonEmpty) nubbedInd.get + 1 else curInd)
@@ -376,12 +377,12 @@ object Deltas extends Logger {
     case Some(start) => {
       val indexedS = s.zip(start to (start + s.size - 1))
 
-      trace("    nub | indexedS = " + indexedS)
+      DeltasLogger.trace("    nub | indexedS = " + indexedS)
 
       //Get the list of all variables occurring in u
       var presentVars = collectVariables(u).filter(isEigenvariable(_:FOLVar, eigenvariable)).distinct
 
-      trace("    nub | presentVars = " + presentVars)
+      DeltasLogger.trace("    nub | presentVars = " + presentVars)
 
       //Go through s, look ahead for duplicates, and delete them.
       def nub2(u: types.U, s: List[(List[FOLTerm],Int)]) : types.RawDecomposition = s match {
@@ -392,14 +393,14 @@ object Deltas extends Logger {
           //The duplicates are all the duplicates of lst. The rest is lst + all vectors not identical to it.
           val (duplicates,rest) = xs.partition(y => y._1 == lst)
 
-          trace("    nub2 | duplicates,rest = " + (duplicates,rest))
+          DeltasLogger.trace("    nub2 | duplicates,rest = " + (duplicates,rest))
 
           //go through all duplicates, rename the corresponding variables in u to ev_[ind]
           //and delete ev_[x] from presentvars
           val newU = duplicates.foldLeft(u)((curU, dupl) => {
-            trace("        | deleting duplicate " + eigenvariable + "_" + dupl._2 )
+            DeltasLogger.trace("        | deleting duplicate " + eigenvariable + "_" + dupl._2 )
             presentVars = presentVars.filter(pv => pv.toString != (eigenvariable + "_" + dupl._2))
-            trace("        | now present vars: " + presentVars)
+            DeltasLogger.trace("        | now present vars: " + presentVars)
             replaceFreeOccurenceOf(eigenvariable + "_" + dupl._2, eigenvariable + "_" + ind, curU)
           })
 
@@ -411,17 +412,17 @@ object Deltas extends Logger {
       //Merge duplicate vars in u and delete elements of s.
       val (swissCheeseU,newS) = nub2(u, indexedS)
 
-      trace("    nub | (swCU, newS) = " + (swissCheeseU,newS))
+      DeltasLogger.trace("    nub | (swCU, newS) = " + (swissCheeseU,newS))
 
       //Merging with nub2 will have created holes in u => reindex the variables in u to get a contiuous segment
       val renamings = presentVars.toList.sortBy(x => x.toString).zip(start to (presentVars.size - 1))
 
-      trace("    nub | renamings (there are " + renamings.length + ") = " + renamings)
+      DeltasLogger.trace("    nub | renamings (there are " + renamings.length + ") = " + renamings)
 
       val reindexedU = renamings.foldLeft(swissCheeseU) {(curU,ren) => 
-        trace("        | rename: " + ren._1 + " -> " + eigenvariable + "_" + ren._2)
+        DeltasLogger.trace("        | rename: " + ren._1 + " -> " + eigenvariable + "_" + ren._2)
         val ret = replaceFreeOccurenceOf(ren._1.toString, eigenvariable + "_" + ren._2, curU)
-        trace("        | result: " + ret)
+        DeltasLogger.trace("        | result: " + ret)
         ret
       }
 

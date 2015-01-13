@@ -19,10 +19,14 @@ import at.logic.calculi.lksk.{ExistsSkLeftRule, ForallSkRightRule, ExistsSkRight
                               Axiom => AxiomSk, LabelledFormulaOccurrence}
 import at.logic.calculi.lksk.TypeSynonyms._
 
+import org.slf4j.LoggerFactory
+
 case class ProjectionException(message : String, original_proof: LKProof, new_proofs : List[LKProof], nested : Exception)
   extends Exception(message, nested) { }
 
-object Projections extends at.logic.utils.logging.Logger {
+object Projections {
+
+  private val ProjectionsLogger = LoggerFactory.getLogger("ProjectionsLogger")
  
   def reflexivity_projection( proof:LKProof, t : TA = Ti) : LKProof = {
     //TODO: in case of fol, fol equality is not used
@@ -70,7 +74,7 @@ object Projections extends at.logic.utils.logging.Logger {
   def apply( proof: LKProof, cut_ancs: Set[FormulaOccurrence], pred : HOLFormula => Boolean) : Set[LKProof] = {
     implicit val c_ancs = cut_ancs
     try {
-      debug("working on rule "+proof.rule)
+      ProjectionsLogger.debug("working on rule "+proof.rule)
     
     proof match {
       case Axiom(s) => Set(Axiom(s))

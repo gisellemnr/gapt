@@ -4,6 +4,7 @@ import at.logic.utils.dssupport.ListSupport
 
 import scala.collection.mutable
 import at.logic.utils.logging.StopwatchStatus.{STOPPED, RUNNING}
+import org.slf4j.LoggerFactory
 
 /**
  * Stopwatch Status
@@ -19,7 +20,9 @@ object StopwatchStatus extends Enumeration {
  * and read it out by using toXXX methods.
  *
  */
-class Stopwatch() extends Logger {
+class Stopwatch() {
+
+  private val StopwatchLogger = LoggerFactory.getLogger("StopwatchLogger")
 
   var status = STOPPED
   var startTime = System.currentTimeMillis()
@@ -33,7 +36,7 @@ class Stopwatch() extends Logger {
   def start() = {
     if(status == RUNNING)
     {
-      debug("Stopwatch is already running. Resetting it.")
+      StopwatchLogger.debug("Stopwatch is already running. Resetting it.")
     }
     status = RUNNING
     startTime = System.currentTimeMillis()
@@ -48,7 +51,7 @@ class Stopwatch() extends Logger {
   def lap(msg: String) : Long = {
     if(status == STOPPED)
     {
-      debug("Stopwatch has not been started. Can not measure time.")
+      StopwatchLogger.debug("Stopwatch has not been started. Can not measure time.")
       return 0
     }
     val now = System.currentTimeMillis()
@@ -67,7 +70,7 @@ class Stopwatch() extends Logger {
   def save(msg: String) : Long = {
     if(status == STOPPED)
     {
-      debug("Stopwatch has not been started. Can not measure time.")
+      StopwatchLogger.debug("Stopwatch has not been started. Can not measure time.")
       return 0
     }
     val now = System.currentTimeMillis()
@@ -86,7 +89,7 @@ class Stopwatch() extends Logger {
    */
   def stop(msg: String) : Long = {
     if(status == STOPPED){
-      debug("Stopwatch is not running. Nothing to do here.")
+      StopwatchLogger.debug("Stopwatch is not running. Nothing to do here.")
       return 0
     }
     val now = System.currentTimeMillis()

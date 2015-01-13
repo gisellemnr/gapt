@@ -8,10 +8,13 @@ import at.logic.language.fol._
 import at.logic.calculi.resolution.{FClause, Clause}
 import at.logic.algorithms.lk.{applySubstitution => applySub, CleanStructuralRules, CloneLKProof}
 import at.logic.language.hol.HOLFormula
-import at.logic.utils.logging.Logger
 
+import org.slf4j.LoggerFactory
 
-object RobinsonToLK extends Logger {
+object RobinsonToLK {
+
+  private val RobinsonToLKLogger = LoggerFactory.getLogger("RobinsonToLKLogger")
+
   type mapT = scala.collection.mutable.Map[FClause,LKProof]
 
   //encapsulates a memo table s.t. subsequent runs of PCNF are not computed multiple times for the same c
@@ -38,7 +41,7 @@ object RobinsonToLK extends Logger {
     val memotable = new PCNFMemoTable(s)
     //val p = addWeakenings.weaken(ContractionMacroRule(recConvert(resproof, s, scala.collection.mutable.Map[FClause,LKProof](), memotable.getPCNF),s, strict = false), s)
     val p = WeakeningContractionMacroRule(recConvert(resproof, s, scala.collection.mutable.Map[FClause,LKProof](), memotable.getPCNF),s, strict = true)
-    debug("Memoization saved "+memotable.getHits()+" calls!")
+    RobinsonToLKLogger.debug("Memoization saved "+memotable.getHits()+" calls!")
     p
   }
 
@@ -46,7 +49,7 @@ object RobinsonToLK extends Logger {
   def apply(resproof: RobinsonResolutionProof, s: FSequent, map: mapT): LKProof = {
     val memotable = new PCNFMemoTable(s)
     val p = WeakeningContractionMacroRule(recConvert(resproof, s, map, memotable.getPCNF),s, strict = false)
-    debug("Memoization saved "+memotable.getHits()+" calls!")
+    RobinsonToLKLogger.debug("Memoization saved "+memotable.getHits()+" calls!")
     p
   }
 
@@ -127,7 +130,7 @@ object RobinsonToLK extends Logger {
             if(isTrivial(aux1.formula, aux2.formula, lof)) {
               val newEndSequent = FSequent(u1.root.antecedent.map(_.formula) ++ u2.root.antecedent.map(_.formula),
                                            u1.root.succedent.filterNot(_ == aux1).map(_.formula) ++ u2.root.succedent.map(_.formula))
-              println("This paramodulation is trivial.")
+              RobinsonToLKLogger.info("This paramodulation is trivial.")
               WeakeningMacroRule(u2, newEndSequent)
             }
             else
@@ -144,7 +147,7 @@ object RobinsonToLK extends Logger {
             if(isTrivial(aux1.formula, aux2.formula, rof)) {
               val newEndSequent = FSequent(u1.root.antecedent.map(_.formula) ++ u2.root.antecedent.map(_.formula),
                                            u1.root.succedent.filterNot(_ == aux1).map(_.formula) ++ u2.root.succedent.map(_.formula))
-              println("This paramodulation is trivial.")
+              RobinsonToLKLogger.info("This paramodulation is trivial.")
               WeakeningMacroRule(u2, newEndSequent)
             }
             else
@@ -154,9 +157,9 @@ object RobinsonToLK extends Logger {
         }
         // this case is applicable only if the proof is an instance of RobinsonProofWithInstance
         case Instance(root,p,s) =>
-          debug("applying sub "+s+" to "+root)
+          RobinsonToLKLogger.debug("applying sub "+s+" to "+root)
           val rp = recConvert(p, seq,map,createAxiom)
-          debug("lk proof root is "+rp.root)
+          RobinsonToLKLogger.debug("lk proof root is "+rp.root)
           try {
             applySub(rp, s)._1
           } catch {

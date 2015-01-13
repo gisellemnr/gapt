@@ -19,11 +19,15 @@ import at.logic.language.hol.skolemSymbols.SkolemSymbolFactory
 import at.logic.utils.ds.streams.Definitions._
 import at.logic.calculi.slk.{trsArrowLeftRule, SchemaProofLinkRule}
 import at.logic.calculi.lk.base._
-import at.logic.utils.logging.Logger
 import at.logic.language.lambda.symbols.SymbolA
 import at.logic.calculi.lk._
 
-object skolemize extends Logger {
+import org.slf4j.LoggerFactory
+
+object skolemize {
+
+  private val SkolemizeLogger = LoggerFactory.getLogger("SkolemizeLogger")
+
   /* proof skolemization */
   def apply(p: LKProof) : LKProof = 
   {
@@ -81,7 +85,7 @@ object skolemize extends Logger {
     implicit val s_map = symbol_map
     implicit val i_map = inst_map
     implicit val c_ancs = cut_ancs
-    trace("=== Skolemizing: " + proof.root + " ===")
+    SkolemizeLogger.trace("=== Skolemizing: " + proof.root + " ===")
     proof match
     {
       case SchemaProofLinkRule(s, link, indices) => {
@@ -89,7 +93,7 @@ object skolemize extends Logger {
         val succ = s.succedent
         val new_seq = ( ant.map( fo => fo.formula ), succ.map( fo => fo.formula ) )
         val ax = Axiom( new_seq._1, new_seq._2 )
-        trace("Skolemization creates SchemaProofLink: " + ax.root)
+        SkolemizeLogger.trace("Skolemization creates SchemaProofLink: " + ax.root)
         var new_map = ant.zipWithIndex.foldLeft(new HashMap[FormulaOccurrence, FormulaOccurrence])( (m, p) => m + ( p._1 -> ax.root.antecedent( p._2 ) ))
         new_map = succ.zipWithIndex.foldLeft(new_map)((m, p) => m + ( p._1 -> ax.root.succedent( p._2 )))
         (ax, new_map)
@@ -100,7 +104,7 @@ object skolemize extends Logger {
 /*        val new_seq = Sequent( ant.map( fo => fo.formula ), succ.map( fo => fo.formula ) ) */
         val new_seq = ( ant.map( fo => fo.formula ), succ.map( fo => fo.formula ) )
         val ax = Axiom( new_seq._1, new_seq._2 )
-        trace("Skolemization creates Axiom: " + ax.root)
+        SkolemizeLogger.trace("Skolemization creates Axiom: " + ax.root)
         var new_map = ant.zipWithIndex.foldLeft(new HashMap[FormulaOccurrence, FormulaOccurrence])( (m, p) => m + ( p._1 -> ax.root.antecedent( p._2 ) ))
         new_map = succ.zipWithIndex.foldLeft(new_map)((m, p) => m + ( p._1 -> ax.root.succedent( p._2 )))
         (ax, new_map)
@@ -426,16 +430,16 @@ object skolemize extends Logger {
     case Neg(f) => Neg( sk( f, invert( pol ), terms, symbols ) )
     case ExVar(x, f) =>
       if (pol == 1) {
-        trace( "skolemizing AllQ")
+        SkolemizeLogger.trace( "skolemizing AllQ")
         val sym = HOLConst(symbols.head, FunctionType(x.exptype, terms.map(_.exptype)))
         val sf = Function( sym, terms)
 
         val sub = Substitution(x, sf)
-        trace( "substitution: " + sub )
-        trace( "before: " + f )
-        trace( "after: " + sub( f ) )
+        SkolemizeLogger.trace( "substitution: " + sub )
+        SkolemizeLogger.trace( "before: " + f )
+        SkolemizeLogger.trace( "after: " + sub( f ) )
         val res = sk( sub( f ), pol, terms, symbols.tail )
-        trace( "result of skolemization: " + res )
+        SkolemizeLogger.trace( "result of skolemization: " + res )
         res
       }
       else
@@ -443,16 +447,16 @@ object skolemize extends Logger {
     case AllVar(x, f) =>
       if (pol == 0)
       {
-        trace( "skolemizing AllQ")
+        SkolemizeLogger.trace( "skolemizing AllQ")
         val sym = HOLConst(symbols.head, FunctionType(x.exptype, terms.map(_.exptype)))
         val sf = Function( sym, terms)
 
         val sub = Substitution(x, sf)
-        trace( "substitution: " + sub )
-        trace( f.toString )
-        trace( sub( f ).toString )
+        SkolemizeLogger.trace( "substitution: " + sub )
+        SkolemizeLogger.trace( f.toString )
+        SkolemizeLogger.trace( sub( f ).toString )
         val res = sk( sub( f ), pol, terms, symbols.tail )
-        trace( "result of skolemization: " + res )
+        SkolemizeLogger.trace( "result of skolemization: " + res )
         res
       }
       else

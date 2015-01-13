@@ -9,15 +9,14 @@ import at.logic.language.fol.FOLFormula
 import at.logic.language.hol._
 import at.logic.calculi.resolution._
 import at.logic.algorithms.resolution.{CNFp, TseitinCNF}
+import at.logic.calculi.lk.base.FSequent
+import at.logic.provers.Prover
+import scala.collection.immutable.HashMap
   
 import java.io._
 import java.lang.StringBuilder
 
-import at.logic.calculi.lk.base.FSequent
-
-import at.logic.provers.Prover
-
-import scala.collection.immutable.HashMap
+import org.slf4j.LoggerFactory
 
 trait Interpretation {
   // Interpret an atom.
@@ -36,6 +35,8 @@ trait Interpretation {
 
 // Call MiniSAT to solve quantifier-free HOLFormulas.
 class MiniSAT extends at.logic.utils.logging.Stopwatch {
+
+  private val MiniSATLogger = LoggerFactory.getLogger("MiniSATLogger")
 
   class MapBasedInterpretation( val model : Map[HOLFormula, Boolean]) extends Interpretation {
     def interpretAtom(atom : HOLFormula) = model.get(atom) match {
@@ -132,17 +133,17 @@ class MiniSAT extends at.logic.utils.logging.Stopwatch {
     out.append(sb.toString())
     out.close()
     
-    trace( "Generated MiniSAT input: ")
-    trace(sb.toString());
+    MiniSATLogger.trace( "Generated MiniSAT input: ")
+    MiniSATLogger.trace(sb.toString());
     
     // run minisat
     
     val bin = "minisat";
     val run = bin + " " + temp_in.getAbsolutePath() + " " + temp_out.getAbsolutePath();
-    debug("Starting minisat...");
+    MiniSATLogger.debug("Starting minisat...");
     val p = Runtime.getRuntime().exec(run);
     p.waitFor();
-    debug("minisat finished.");
+    MiniSATLogger.debug("minisat finished.");
     
     // parse minisat output and construct map
     val in = new BufferedReader(new InputStreamReader(
@@ -150,7 +151,7 @@ class MiniSAT extends at.logic.utils.logging.Stopwatch {
     
     val sat = in.readLine();
     
-    trace("MiniSAT result: " + sat)
+    MiniSATLogger.trace("MiniSAT result: " + sat)
     
     if ( sat.equals("SAT") ) {
       Some( in.readLine().split(" ").
@@ -171,7 +172,10 @@ class MiniSAT extends at.logic.utils.logging.Stopwatch {
   }
 }
 
-class MiniSATProver extends Prover with at.logic.utils.logging.Logger with at.logic.utils.traits.ExternalProgram {
+class MiniSATProver extends Prover with at.logic.utils.traits.ExternalProgram {
+
+  private val MiniSATProverLogger = LoggerFactory.getLogger("MiniSATProverLogger")
+
   def getLKProof( seq : FSequent ) : Option[at.logic.calculi.lk.base.LKProof] = 
     throw new Exception("MiniSAT does not produce proofs!")
 
@@ -182,7 +186,7 @@ class MiniSATProver extends Prover with at.logic.utils.logging.Logger with at.lo
 
   override def isValid( seq : FSequent ) : Boolean = {
     val sat = new MiniSAT()
-    trace("calling MiniSAT.isValid( " + Imp(And(seq.antecedent.toList), Or(seq.succedent.toList)) + ")")
+    MiniSATProverLogger.trace("calling MiniSAT.isValid( " + Imp(And(seq.antecedent.toList), Or(seq.succedent.toList)) + ")")
     sat.isValid(Imp(And(seq.antecedent.toList), Or(seq.succedent.toList)))
   }
 
