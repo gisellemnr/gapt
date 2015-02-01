@@ -1,0 +1,119 @@
+---------- now starting TSTP-Prover9/1 cut, 1 quantifier
+ok: 345
+parsing_timeout: 341
+parsing_out_of_memory: 0
+parsing_stack_overflow: 0
+parsing_other_exception: 0
+termex_timeout: 0
+delta_table_computation_timeout: 138
+grammar_finding_timeout: 36
+sol_timeout: 97
+prcons_timeout: 200
+cutintro_out_of_memory: 0
+cutintro_stack_overflow: 0
+cutintro_uncompressible: 1535
+cutintro_ehs_unprovable: 2
+cutintro_other_exception: 215
+
+---------- now starting TSTP-Prover9/1 cut, many quantifiers
+ok: 267
+parsing_timeout: 342
+parsing_out_of_memory: 0
+parsing_stack_overflow: 0
+parsing_other_exception: 0
+termex_timeout: 0
+delta_table_computation_timeout: 293
+grammar_finding_timeout: 9
+sol_timeout: 52
+prcons_timeout: 131
+cutintro_out_of_memory: 0
+cutintro_stack_overflow: 0
+cutintro_uncompressible: 1310
+cutintro_ehs_unprovable: 1
+cutintro_other_exception: 504
+
+---------- now starting TSTP-Prover9/many cuts, 1 quantifier
+ok: 1785
+parsing_timeout: 341
+parsing_out_of_memory: 0
+parsing_stack_overflow: 0
+parsing_other_exception: 0
+termex_timeout: 0
+delta_table_computation_timeout: 0
+grammar_finding_timeout: 780
+sol_timeout: 0
+prcons_timeout: 0
+cutintro_out_of_memory: 0
+cutintro_stack_overflow: 0
+cutintro_uncompressible: 0
+cutintro_ehs_unprovable: 0
+cutintro_other_exception: 3
+
+---------- now starting SMT-LIB-QF_UF-veriT/1 cut, 1 quantifier
+ok: 1
+parsing_timeout: 1
+parsing_out_of_memory: 0
+parsing_stack_overflow: 0
+parsing_other_exception: 0
+termex_timeout: 0
+delta_table_computation_timeout: 91
+grammar_finding_timeout: 41
+sol_timeout: 1
+prcons_timeout: 5
+cutintro_out_of_memory: 0
+cutintro_stack_overflow: 0
+cutintro_uncompressible: 2
+cutintro_ehs_unprovable: 0
+cutintro_other_exception: 0
+
+---------- now starting SMT-LIB-QF_UF-veriT/1 cut, many quantifiers
+ok: 1
+parsing_timeout: 1
+parsing_out_of_memory: 0
+parsing_stack_overflow: 0
+parsing_other_exception: 0
+termex_timeout: 0
+delta_table_computation_timeout: 136
+grammar_finding_timeout: 0
+sol_timeout: 0
+prcons_timeout: 1
+cutintro_out_of_memory: 0
+cutintro_stack_overflow: 0
+cutintro_uncompressible: 2
+cutintro_ehs_unprovable: 0
+cutintro_other_exception: 1
+
+---------- now starting SMT-LIB-QF_UF-veriT/many cuts, 1 quantifier
+ok: 4
+parsing_timeout: 1
+parsing_out_of_memory: 0
+parsing_stack_overflow: 0
+parsing_other_exception: 0
+termex_timeout: 0
+delta_table_computation_timeout: 0
+grammar_finding_timeout: 136
+sol_timeout: 0
+prcons_timeout: 0
+cutintro_out_of_memory: 0
+cutintro_stack_overflow: 0
+cutintro_uncompressible: 0
+cutintro_ehs_unprovable: 0
+cutintro_other_exception: 1
+
+---------- TOTALS
+ok: 2403
+parsing_timeout: 1027
+parsing_out_of_memory: 0
+parsing_stack_overflow: 0
+parsing_other_exception: 0
+termex_timeout: 0
+delta_table_computation_timeout: 658
+grammar_finding_timeout: 1002
+sol_timeout: 150
+prcons_timeout: 337
+cutintro_out_of_memory: 0
+cutintro_stack_overflow: 0
+cutintro_uncompressible: 2849
+cutintro_ehs_unprovable: 3
+cutintro_other_exception: 724
+

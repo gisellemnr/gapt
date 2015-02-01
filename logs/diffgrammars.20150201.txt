@@ -1,0 +1,1468 @@
+Methods:
+0 -> one_cut_one_quantifier
+1 -> one_cut_many_quantifiers
+2 -> many_cuts_one_quantifier (n=1)
+3 -> many_cuts_one_quantifier (n=2)
+
+Inconsistent results (different minimal grammar sizes):
+TODO: check if the methods are introducing the same number of cuts.
+SquareEdges2DimExampleProof(6)
+0   11
+1   11
+2   10
+3   10
+SquareEdges2DimExampleProof(7)
+0   13
+1   13
+2   12
+3   12
+testing/TSTP/prover9/ALG/ALG029+1/Prover9---1109a.THM-Ref.s.out
+0   15
+1   12
+2   15
+3   12
+testing/TSTP/prover9/ALG/ALG030+1/Prover9---1109a.THM-Ref.s.out
+0   15
+1   12
+2   15
+3   12
+testing/TSTP/prover9/ALG/ALG074+1/Prover9---1109a.THM-Ref.s.out
+0   17
+1   16
+2   15
+3   15
+testing/TSTP/prover9/ALG/ALG178+1/Prover9---1109a.THM-Ref.s.out
+0   13
+1   13
+2   12
+3   12
+testing/TSTP/prover9/ALG/ALG179+1/Prover9---1109a.THM-Ref.s.out
+0   13
+1   13
+2   12
+3   12
+testing/TSTP/prover9/ALG/ALG222+1/Prover9---1109a.THM-Ref.s.out
+0   15
+1   14
+2   15
+3   14
+testing/TSTP/prover9/ALG/ALG245-1/Prover9---1109a.UNS-Ref.s.out
+0   16
+1   16
+2   15
+testing/TSTP/prover9/ALG/ALG437-1/Prover9---1109a.UNS-Ref.s.out
+0   26
+1   26
+2   24
+testing/TSTP/prover9/ALG/ALG441-1/Prover9---1109a.UNS-Ref.s.out
+1   17
+2   22
+3   18
+testing/TSTP/prover9/BOO/BOO001-1/Prover9---1109a.UNS-Ref.s.out
+0   19
+1   18
+2   19
+testing/TSTP/prover9/BOO/BOO003-2/Prover9---1109a.UNS-Ref.s.out
+0   23
+1   23
+2   20
+testing/TSTP/prover9/BOO/BOO003-4/Prover9---1109a.UNS-Ref.s.out
+0   12
+1   12
+2   11
+3   11
+testing/TSTP/prover9/BOO/BOO010-1/Prover9---1109a.UNS-Ref.s.out
+0   26
+1   26
+2   25
+testing/TSTP/prover9/BOO/BOO011-4/Prover9---1109a.UNS-Ref.s.out
+0   27
+1   25
+2   24
+testing/TSTP/prover9/BOO/BOO012-2/Prover9---1109a.UNS-Ref.s.out
+0   19
+1   19
+2   18
+3   18
+testing/TSTP/prover9/BOO/BOO016-1/Prover9---1109a.UNS-Ref.s.out
+0   25
+1   25
+2   24
+testing/TSTP/prover9/BOO/BOO018-4/Prover9---1109a.UNS-Ref.s.out
+0   30
+1   30
+2   23
+testing/TSTP/prover9/CAT/CAT005-1/Prover9---1109a.UNS-Ref.s.out
+0   12
+1   12
+2   11
+3   11
+testing/TSTP/prover9/CAT/CAT009-1/Prover9---1109a.UNS-Ref.s.out
+0   24
+1   24
+2   20
+testing/TSTP/prover9/COL/COL002-5/Prover9---1109a.UNS-Ref.s.out
+0   20
+1   20
+2   19
+testing/TSTP/prover9/COL/COL062-1/Prover9---1109a.UNS-Ref.s.out
+1   8
+2   9
+3   9
+testing/TSTP/prover9/COL/COL064-1/Prover9---1109a.UNS-Ref.s.out
+1   10
+2   11
+3   11
+testing/TSTP/prover9/COL/COL064-3/Prover9---1109a.UNS-Ref.s.out
+1   9
+2   10
+3   10
+testing/TSTP/prover9/COL/COL064-6/Prover9---1109a.UNS-Ref.s.out
+1   9
+2   10
+3   10
+testing/TSTP/prover9/COL/COL065-1/Prover9---1109a.UNS-Ref.s.out
+1   10
+2   11
+3   11
+testing/TSTP/prover9/COL/COL090-1/Prover9---1109a.UNS-Ref.s.out
+1   14
+2   18
+3   18
+testing/TSTP/prover9/COL/COL090-3/Prover9---1109a.UNS-Ref.s.out
+1   14
+2   18
+3   18
+testing/TSTP/prover9/FLD/FLD012-4/Prover9---1109a.UNS-Ref.s.out
+0   25
+1   25
+2   22
+3   22
+testing/TSTP/prover9/FLD/FLD026-3/Prover9---1109a.UNS-Ref.s.out
+0   20
+1   20
+2   19
+3   19
+testing/TSTP/prover9/FLD/FLD041-4/Prover9---1109a.UNS-Ref.s.out
+0   15
+1   15
+2   14
+3   14
+testing/TSTP/prover9/FLD/FLD047-4/Prover9---1109a.UNS-Ref.s.out
+0   27
+1   27
+2   25
+testing/TSTP/prover9/FLD/FLD057-3/Prover9---1109a.UNS-Ref.s.out
+0   31
+1   31
+2   29
+testing/TSTP/prover9/GEO/GEO002-2/Prover9---1109a.UNS-Ref.s.out
+1   8
+2   9
+3   9
+testing/TSTP/prover9/GEO/GEO006-1/Prover9---1109a.UNS-Ref.s.out
+1   15
+2   16
+3   16
+testing/TSTP/prover9/GEO/GEO009-3/Prover9---1109a.UNS-Ref.s.out
+0   13
+1   12
+2   13
+3   12
+testing/TSTP/prover9/GEO/GEO026-2/Prover9---1109a.UNS-Ref.s.out
+1   7
+2   8
+3   8
+testing/TSTP/prover9/GEO/GEO027-2/Prover9---1109a.UNS-Ref.s.out
+0   10
+1   9
+2   10
+3   10
+testing/TSTP/prover9/GEO/GEO028-2/Prover9---1109a.UNS-Ref.s.out
+0   22
+1   18
+2   21
+testing/TSTP/prover9/GEO/GEO029-2/Prover9---1109a.UNS-Ref.s.out
+0   23
+1   19
+2   21
+testing/TSTP/prover9/GEO/GEO030-2/Prover9---1109a.UNS-Ref.s.out
+0   9
+1   8
+2   9
+3   9
+testing/TSTP/prover9/GEO/GEO037-2/Prover9---1109a.UNS-Ref.s.out
+1   19
+2   21
+3   21
+testing/TSTP/prover9/GEO/GEO041-2/Prover9---1109a.UNS-Ref.s.out
+1   12
+2   16
+3   14
+testing/TSTP/prover9/GEO/GEO043-2/Prover9---1109a.UNS-Ref.s.out
+1   13
+2   15
+3   15
+testing/TSTP/prover9/GEO/GEO067-2/Prover9---1109a.UNS-Ref.s.out
+0   11
+1   11
+2   9
+3   9
+testing/TSTP/prover9/GEO/GEO076-4/Prover9---1109a.UNS-Ref.s.out
+1   17
+2   18
+3   18
+testing/TSTP/prover9/GEO/GEO126+1/Prover9---1109a.THM-Ref.s.out
+0   26
+1   26
+2   25
+testing/TSTP/prover9/GEO/GEO127+1/Prover9---1109a.THM-Ref.s.out
+0   29
+1   29
+2   27
+testing/TSTP/prover9/GEO/GEO127-1/Prover9---1109a.UNS-Ref.s.out
+0   26
+1   26
+2   25
+3   25
+testing/TSTP/prover9/GEO/GEO146+1/Prover9---1109a.THM-Ref.s.out
+1   5
+2   6
+3   6
+testing/TSTP/prover9/GEO/GEO146-1/Prover9---1109a.UNS-Ref.s.out
+1   5
+2   6
+3   6
+testing/TSTP/prover9/GEO/GEO180+1/Prover9---1109a.THM-Ref.s.out
+0   14
+1   13
+2   14
+3   14
+testing/TSTP/prover9/GEO/GEO181+1/Prover9---1109a.THM-Ref.s.out
+0   15
+1   13
+2   15
+3   15
+testing/TSTP/prover9/GEO/GEO182+1/Prover9---1109a.THM-Ref.s.out
+1   8
+2   9
+3   9
+testing/TSTP/prover9/GEO/GEO182+2/Prover9---1109a.THM-Ref.s.out
+1   9
+2   10
+3   10
+testing/TSTP/prover9/GEO/GEO190+1/Prover9---1109a.THM-Ref.s.out
+1   8
+2   9
+3   9
+testing/TSTP/prover9/GEO/GEO191+1/Prover9---1109a.THM-Ref.s.out
+0   28
+1   24
+2   27
+testing/TSTP/prover9/GEO/GEO193+1/Prover9---1109a.THM-Ref.s.out
+0   23
+1   23
+2   22
+testing/TSTP/prover9/GEO/GEO196+1/Prover9---1109a.THM-Ref.s.out
+0   18
+1   17
+2   18
+3   18
+testing/TSTP/prover9/GEO/GEO198+1/Prover9---1109a.THM-Ref.s.out
+0   16
+1   15
+2   15
+3   15
+testing/TSTP/prover9/GEO/GEO199+2/Prover9---1109a.THM-Ref.s.out
+0   16
+1   15
+2   16
+3   16
+testing/TSTP/prover9/GEO/GEO200+1/Prover9---1109a.THM-Ref.s.out
+1   7
+2   8
+3   8
+testing/TSTP/prover9/GEO/GEO200+2/Prover9---1109a.THM-Ref.s.out
+1   8
+2   9
+3   9
+testing/TSTP/prover9/GEO/GEO201+1/Prover9---1109a.THM-Ref.s.out
+1   9
+2   10
+3   10
+testing/TSTP/prover9/GEO/GEO201+2/Prover9---1109a.THM-Ref.s.out
+1   9
+2   11
+3   11
+testing/TSTP/prover9/GEO/GEO201+3/Prover9---1109a.THM-Ref.s.out
+0   25
+1   25
+2   24
+testing/TSTP/prover9/GEO/GEO204+2/Prover9---1109a.THM-Ref.s.out
+0   11
+1   11
+2   10
+3   10
+testing/TSTP/prover9/GEO/GEO205+1/Prover9---1109a.THM-Ref.s.out
+0   13
+1   13
+2   12
+3   12
+testing/TSTP/prover9/GEO/GEO205+3/Prover9---1109a.THM-Ref.s.out
+0   21
+1   21
+2   19
+3   19
+testing/TSTP/prover9/GEO/GEO255+3/Prover9---1109a.THM-Ref.s.out
+0   13
+1   12
+2   13
+3   13
+testing/TSTP/prover9/GEO/GEO266+3/Prover9---1109a.THM-Ref.s.out
+0   18
+1   13
+2   18
+3   13
+testing/TSTP/prover9/GRA/GRA004+1/Prover9---1109a.THM-Ref.s.out
+0   18
+1   18
+2   17
+3   17
+testing/TSTP/prover9/GRP/GRP001-4/Prover9---1109a.UNS-Ref.s.out
+0   10
+1   10
+2   8
+3   8
+testing/TSTP/prover9/GRP/GRP011-4/Prover9---1109a.UNS-Ref.s.out
+0   17
+1   17
+2   15
+3   15
+testing/TSTP/prover9/GRP/GRP040-3/Prover9---1109a.UNS-Ref.s.out
+0   26
+1   26
+2   25
+testing/TSTP/prover9/GRP/GRP124-1.004/Prover9---1109a.UNS-Ref.s.out
+0   28
+1   28
+2   23
+testing/TSTP/prover9/GRP/GRP124-3.004/Prover9---1109a.UNS-Ref.s.out
+0   26
+1   26
+2   23
+testing/TSTP/prover9/GRP/GRP124-4.004/Prover9---1109a.UNS-Ref.s.out
+0   26
+1   26
+2   21
+3   21
+testing/TSTP/prover9/GRP/GRP124-6.004/Prover9---1109a.UNS-Ref.s.out
+0   26
+1   26
+2   23
+testing/TSTP/prover9/GRP/GRP124-7.004/Prover9---1109a.UNS-Ref.s.out
+0   26
+1   26
+2   23
+testing/TSTP/prover9/GRP/GRP124-8.004/Prover9---1109a.UNS-Ref.s.out
+0   25
+1   25
+2   23
+testing/TSTP/prover9/GRP/GRP124-9.004/Prover9---1109a.UNS-Ref.s.out
+0   30
+1   30
+2   26
+testing/TSTP/prover9/GRP/GRP126-2.004/Prover9---1109a.UNS-Ref.s.out
+0   20
+1   20
+2   17
+3   17
+testing/TSTP/prover9/GRP/GRP127-3.004/Prover9---1109a.UNS-Ref.s.out
+0   28
+1   28
+2   24
+testing/TSTP/prover9/GRP/GRP128-4.003/Prover9---1109a.UNS-Ref.s.out
+0   16
+1   16
+2   15
+3   15
+testing/TSTP/prover9/GRP/GRP129-4.004/Prover9---1109a.UNS-Ref.s.out
+0   25
+1   25
+2   23
+testing/TSTP/prover9/GRP/GRP130-1.003/Prover9---1109a.UNS-Ref.s.out
+0   21
+1   20
+2   18
+testing/TSTP/prover9/GRP/GRP130-2.003/Prover9---1109a.UNS-Ref.s.out
+0   21
+1   21
+2   19
+testing/TSTP/prover9/GRP/GRP130-3.003/Prover9---1109a.UNS-Ref.s.out
+0   23
+1   23
+2   22
+testing/TSTP/prover9/GRP/GRP133-1.003/Prover9---1109a.UNS-Ref.s.out
+0   29
+1   29
+2   24
+testing/TSTP/prover9/GRP/GRP156-1/Prover9---1109a.UNS-Ref.s.out
+0   27
+2   26
+testing/TSTP/prover9/GRP/GRP169-2/Prover9---1109a.UNS-Ref.s.out
+0   20
+1   20
+2   19
+testing/TSTP/prover9/GRP/GRP171-1/Prover9---1109a.UNS-Ref.s.out
+0   27
+1   26
+2   25
+testing/TSTP/prover9/GRP/GRP171-2/Prover9---1109a.UNS-Ref.s.out
+0   25
+1   24
+2   23
+testing/TSTP/prover9/GRP/GRP172-1/Prover9---1109a.UNS-Ref.s.out
+0   24
+1   22
+2   22
+testing/TSTP/prover9/GRP/GRP172-2/Prover9---1109a.UNS-Ref.s.out
+0   26
+1   24
+2   24
+testing/TSTP/prover9/GRP/GRP174-1/Prover9---1109a.UNS-Ref.s.out
+0   15
+1   15
+2   14
+3   14
+testing/TSTP/prover9/GRP/GRP175-4/Prover9---1109a.UNS-Ref.s.out
+0   24
+1   24
+2   23
+testing/TSTP/prover9/GRP/GRP190-1/Prover9---1109a.UNS-Ref.s.out
+0   18
+1   18
+2   17
+3   17
+testing/TSTP/prover9/GRP/GRP190-2/Prover9---1109a.UNS-Ref.s.out
+0   19
+1   19
+2   18
+3   18
+testing/TSTP/prover9/GRP/GRP193-2/Prover9---1109a.UNS-Ref.s.out
+1   17
+2   20
+3   20
+testing/TSTP/prover9/GRP/GRP195-1/Prover9---1109a.UNS-Ref.s.out
+0   19
+1   16
+2   17
+testing/TSTP/prover9/GRP/GRP355-1/Prover9---1109a.UNS-Ref.s.out
+0   27
+2   21
+testing/TSTP/prover9/GRP/GRP455-1/Prover9---1109a.UNS-Ref.s.out
+0   11
+1   11
+2   10
+3   10
+testing/TSTP/prover9/GRP/GRP458-1/Prover9---1109a.UNS-Ref.s.out
+0   11
+1   11
+2   10
+3   10
+testing/TSTP/prover9/GRP/GRP487-1/Prover9---1109a.UNS-Ref.s.out
+0   12
+1   12
+2   11
+3   11
+testing/TSTP/prover9/GRP/GRP520-1/Prover9---1109a.UNS-Ref.s.out
+0   11
+1   10
+2   11
+3   11
+testing/TSTP/prover9/GRP/GRP531-1/Prover9---1109a.UNS-Ref.s.out
+0   23
+1   21
+2   22
+testing/TSTP/prover9/GRP/GRP540-1/Prover9---1109a.UNS-Ref.s.out
+0   16
+1   16
+2   15
+3   15
+testing/TSTP/prover9/GRP/GRP544-1/Prover9---1109a.UNS-Ref.s.out
+0   10
+1   9
+2   10
+3   10
+testing/TSTP/prover9/GRP/GRP552-1/Prover9---1109a.UNS-Ref.s.out
+0   23
+2   21
+testing/TSTP/prover9/GRP/GRP565-1/Prover9---1109a.UNS-Ref.s.out
+0   10
+1   10
+2   9
+3   9
+testing/TSTP/prover9/GRP/GRP573-1/Prover9---1109a.UNS-Ref.s.out
+0   11
+1   11
+2   10
+3   10
+testing/TSTP/prover9/GRP/GRP574-1/Prover9---1109a.UNS-Ref.s.out
+0   17
+1   17
+2   15
+3   15
+testing/TSTP/prover9/GRP/GRP577-1/Prover9---1109a.UNS-Ref.s.out
+0   10
+1   10
+2   9
+3   9
+testing/TSTP/prover9/GRP/GRP578-1/Prover9---1109a.UNS-Ref.s.out
+0   20
+1   20
+2   16
+3   16
+testing/TSTP/prover9/GRP/GRP589-1/Prover9---1109a.UNS-Ref.s.out
+0   12
+1   10
+2   10
+testing/TSTP/prover9/GRP/GRP640+1/Prover9---1109a.THM-Ref.s.out
+0   22
+1   18
+2   22
+testing/TSTP/prover9/GRP/GRP656+1/Prover9---1109a.THM-Ref.s.out
+0   19
+1   19
+2   17
+3   17
+testing/TSTP/prover9/GRP/GRP669-1/Prover9---1109a.UNS-Ref.s.out
+0   24
+1   22
+2   22
+testing/TSTP/prover9/GRP/GRP687-1/Prover9---1109a.UNS-Ref.s.out
+0   40
+1   33
+testing/TSTP/prover9/GRP/GRP700+1/Prover9---1109a.THM-Ref.s.out
+0   22
+1   22
+2   21
+testing/TSTP/prover9/GRP/GRP776+1/Prover9---1109a.THM-Ref.s.out
+0   29
+1   28
+2   26
+testing/TSTP/prover9/HEN/HEN004-1/Prover9---1109a.UNS-Ref.s.out
+0   23
+1   23
+2   22
+testing/TSTP/prover9/HEN/HEN004-2/Prover9---1109a.UNS-Ref.s.out
+0   14
+1   12
+2   14
+3   14
+testing/TSTP/prover9/HEN/HEN004-4/Prover9---1109a.UNS-Ref.s.out
+0   11
+1   10
+2   11
+3   11
+testing/TSTP/prover9/HEN/HEN005-1/Prover9---1109a.UNS-Ref.s.out
+0   13
+1   11
+2   13
+3   13
+testing/TSTP/prover9/HEN/HEN005-3/Prover9---1109a.UNS-Ref.s.out
+0   11
+1   10
+2   11
+3   11
+testing/TSTP/prover9/HEN/HEN005-6/Prover9---1109a.UNS-Ref.s.out
+0   10
+1   9
+2   10
+3   10
+testing/TSTP/prover9/HEN/HEN006-1/Prover9---1109a.UNS-Ref.s.out
+0   21
+1   19
+2   21
+testing/TSTP/prover9/HEN/HEN010-5/Prover9---1109a.UNS-Ref.s.out
+0   29
+1   24
+2   27
+testing/TSTP/prover9/HEN/HEN010-7/Prover9---1109a.UNS-Ref.s.out
+0   26
+1   26
+2   25
+testing/TSTP/prover9/HEN/HEN011-2/Prover9---1109a.UNS-Ref.s.out
+0   27
+1   27
+2   26
+testing/TSTP/prover9/HEN/HEN011-4/Prover9---1109a.UNS-Ref.s.out
+0   37
+1   29
+testing/TSTP/prover9/HEN/HEN011-5/Prover9---1109a.UNS-Ref.s.out
+0   33
+1   25
+testing/TSTP/prover9/HEN/HEN012-1/Prover9---1109a.UNS-Ref.s.out
+0   14
+1   13
+2   14
+3   14
+testing/TSTP/prover9/HEN/HEN012-3/Prover9---1109a.UNS-Ref.s.out
+0   11
+1   10
+2   11
+3   11
+testing/TSTP/prover9/HWC/HWC002-1/Prover9---1109a.UNS-Ref.s.out
+2   13
+3   11
+testing/TSTP/prover9/HWC/HWC003-1/Prover9---1109a.UNS-Ref.s.out
+1   20
+2   24
+testing/TSTP/prover9/HWV/HWV052-1.001.001/Prover9---1109a.UNS-Ref.s.out
+0   11
+1   11
+2   10
+3   10
+testing/TSTP/prover9/KLE/KLE009+1/Prover9---1109a.THM-Ref.s.out
+0   22
+1   22
+2   21
+testing/TSTP/prover9/KLE/KLE009+3/Prover9---1109a.THM-Ref.s.out
+0   24
+1   24
+2   23
+testing/TSTP/prover9/KLE/KLE025+1/Prover9---1109a.THM-Ref.s.out
+1   19
+2   20
+3   20
+testing/TSTP/prover9/KLE/KLE025+2/Prover9---1109a.THM-Ref.s.out
+0   46
+1   45
+testing/TSTP/prover9/KLE/KLE035+2/Prover9---1109a.THM-Ref.s.out
+0   19
+1   19
+2   18
+testing/TSTP/prover9/KLE/KLE037+1/Prover9---1109a.THM-Ref.s.out
+0   21
+1   19
+2   21
+testing/TSTP/prover9/KLE/KLE048+1/Prover9---1109a.THM-Ref.s.out
+0   41
+1   40
+testing/TSTP/prover9/KLE/KLE063+1/Prover9---1109a.THM-Ref.s.out
+0   20
+1   20
+2   19
+3   19
+testing/TSTP/prover9/KLE/KLE093+1/Prover9---1109a.THM-Ref.s.out
+0   26
+1   26
+2   25
+testing/TSTP/prover9/KLE/KLE119+1/Prover9---1109a.THM-Ref.s.out
+0   39
+1   38
+testing/TSTP/prover9/KLE/KLE139+1/Prover9---1109a.THM-Ref.s.out
+0   43
+1   40
+testing/TSTP/prover9/KLE/KLE139+2/Prover9---1109a.THM-Ref.s.out
+0   45
+1   42
+testing/TSTP/prover9/KLE/KLE167+1/Prover9---1109a.THM-Ref.s.out
+0   30
+1   29
+testing/TSTP/prover9/KRS/KRS010-1/Prover9---1109a.UNS-Ref.s.out
+0   17
+1   17
+2   16
+3   16
+testing/TSTP/prover9/KRS/KRS080+1/Prover9---1109a.UNS-Ref.s.out
+0   36
+1   36
+2   30
+testing/TSTP/prover9/KRS/KRS081+1/Prover9---1109a.UNS-Ref.s.out
+0   32
+1   32
+2   30
+testing/TSTP/prover9/KRS/KRS132+1/Prover9---1109a.THM-Ref.s.out
+0   29
+1   29
+2   28
+3   28
+testing/TSTP/prover9/LAT/LAT012-1/Prover9---1109a.UNS-Ref.s.out
+1   17
+2   22
+testing/TSTP/prover9/LAT/LAT338+1/Prover9---1109a.THM-Ref.s.out
+0   43
+1   42
+testing/TSTP/prover9/LCL/LCL006-1/Prover9---1109a.UNS-Ref.s.out
+1   14
+2   17
+testing/TSTP/prover9/LCL/LCL008-1/Prover9---1109a.UNS-Ref.s.out
+0   27
+2   24
+testing/TSTP/prover9/LCL/LCL029-1/Prover9---1109a.UNS-Ref.s.out
+1   17
+2   19
+testing/TSTP/prover9/LCL/LCL042-1/Prover9---1109a.UNS-Ref.s.out
+1   25
+2   27
+testing/TSTP/prover9/LCL/LCL044-1/Prover9---1109a.UNS-Ref.s.out
+0   24
+1   20
+2   24
+testing/TSTP/prover9/LCL/LCL066-1/Prover9---1109a.UNS-Ref.s.out
+1   18
+2   23
+testing/TSTP/prover9/LCL/LCL096-1/Prover9---1109a.UNS-Ref.s.out
+1   8
+2   9
+3   9
+testing/TSTP/prover9/LCL/LCL102-1/Prover9---1109a.UNS-Ref.s.out
+1   16
+2   17
+testing/TSTP/prover9/LCL/LCL110-1/Prover9---1109a.UNS-Ref.s.out
+1   24
+2   27
+testing/TSTP/prover9/LCL/LCL111-1/Prover9---1109a.UNS-Ref.s.out
+1   10
+2   11
+3   11
+testing/TSTP/prover9/LCL/LCL112-1/Prover9---1109a.UNS-Ref.s.out
+1   26
+2   29
+testing/TSTP/prover9/LCL/LCL117-1/Prover9---1109a.UNS-Ref.s.out
+1   7
+2   8
+3   8
+testing/TSTP/prover9/LCL/LCL133-1/Prover9---1109a.UNS-Ref.s.out
+0   14
+1   14
+2   12
+3   12
+testing/TSTP/prover9/LCL/LCL157-1/Prover9---1109a.UNS-Ref.s.out
+0   26
+1   26
+2   24
+testing/TSTP/prover9/LCL/LCL176-3/Prover9---1109a.UNS-Ref.s.out
+1   12
+2   13
+3   13
+testing/TSTP/prover9/LCL/LCL178-3/Prover9---1109a.UNS-Ref.s.out
+1   18
+2   19
+testing/TSTP/prover9/LCL/LCL187-3/Prover9---1109a.UNS-Ref.s.out
+0   34
+1   33
+testing/TSTP/prover9/LCL/LCL188-3/Prover9---1109a.UNS-Ref.s.out
+1   17
+2   21
+testing/TSTP/prover9/LCL/LCL189-3/Prover9---1109a.UNS-Ref.s.out
+1   18
+2   22
+testing/TSTP/prover9/LCL/LCL191-1/Prover9---1109a.UNS-Ref.s.out
+0   34
+1   32
+testing/TSTP/prover9/LCL/LCL193-3/Prover9---1109a.UNS-Ref.s.out
+0   21
+1   18
+2   21
+testing/TSTP/prover9/LCL/LCL194-3/Prover9---1109a.UNS-Ref.s.out
+0   26
+1   23
+testing/TSTP/prover9/LCL/LCL196-3/Prover9---1109a.UNS-Ref.s.out
+0   39
+1   35
+testing/TSTP/prover9/LCL/LCL197-3/Prover9---1109a.UNS-Ref.s.out
+1   17
+2   18
+testing/TSTP/prover9/LCL/LCL202-3/Prover9---1109a.UNS-Ref.s.out
+0   42
+1   36
+testing/TSTP/prover9/LCL/LCL212-3/Prover9---1109a.UNS-Ref.s.out
+1   9
+2   10
+3   10
+testing/TSTP/prover9/LCL/LCL234-1/Prover9---1109a.UNS-Ref.s.out
+1   17
+2   18
+3   18
+testing/TSTP/prover9/LCL/LCL234-3/Prover9---1109a.UNS-Ref.s.out
+0   30
+1   28
+testing/TSTP/prover9/LCL/LCL236-3/Prover9---1109a.UNS-Ref.s.out
+1   19
+2   20
+testing/TSTP/prover9/LCL/LCL237-1/Prover9---1109a.UNS-Ref.s.out
+1   19
+2   20
+testing/TSTP/prover9/LCL/LCL237-3/Prover9---1109a.UNS-Ref.s.out
+1   18
+2   19
+testing/TSTP/prover9/LCL/LCL249-1/Prover9---1109a.UNS-Ref.s.out
+0   27
+1   27
+2   26
+testing/TSTP/prover9/LCL/LCL258-3/Prover9---1109a.UNS-Ref.s.out
+1   19
+2   23
+testing/TSTP/prover9/LCL/LCL261-3/Prover9---1109a.UNS-Ref.s.out
+0   28
+1   26
+testing/TSTP/prover9/LCL/LCL268-3/Prover9---1109a.UNS-Ref.s.out
+1   24
+2   28
+testing/TSTP/prover9/LCL/LCL287-3/Prover9---1109a.UNS-Ref.s.out
+1   25
+2   29
+testing/TSTP/prover9/LCL/LCL311-3/Prover9---1109a.UNS-Ref.s.out
+1   21
+2   24
+testing/TSTP/prover9/LCL/LCL320-3/Prover9---1109a.UNS-Ref.s.out
+0   26
+1   25
+2   26
+testing/TSTP/prover9/LCL/LCL321-3/Prover9---1109a.UNS-Ref.s.out
+0   16
+1   15
+2   16
+3   16
+testing/TSTP/prover9/LCL/LCL322-3/Prover9---1109a.UNS-Ref.s.out
+1   23
+2   26
+testing/TSTP/prover9/LCL/LCL323-3/Prover9---1109a.UNS-Ref.s.out
+1   23
+2   26
+testing/TSTP/prover9/LCL/LCL358-1/Prover9---1109a.UNS-Ref.s.out
+1   12
+2   13
+testing/TSTP/prover9/LCL/LCL359-1/Prover9---1109a.UNS-Ref.s.out
+1   10
+2   11
+3   11
+testing/TSTP/prover9/LCL/LCL362-1/Prover9---1109a.UNS-Ref.s.out
+1   24
+2   28
+testing/TSTP/prover9/LCL/LCL363-1/Prover9---1109a.UNS-Ref.s.out
+1   24
+2   28
+testing/TSTP/prover9/LCL/LCL397-1/Prover9---1109a.UNS-Ref.s.out
+1   17
+2   19
+3   19
+testing/TSTP/prover9/LCL/LCL486+1/Prover9---1109a.THM-Ref.s.out
+0   19
+1   15
+2   17
+3   17
+testing/TSTP/prover9/LCL/LCL488+1/Prover9---1109a.THM-Ref.s.out
+1   11
+2   12
+3   12
+testing/TSTP/prover9/LCL/LCL490+1/Prover9---1109a.THM-Ref.s.out
+0   20
+1   17
+2   20
+testing/TSTP/prover9/LCL/LCL524+1/Prover9---1109a.THM-Ref.s.out
+0   32
+1   30
+testing/TSTP/prover9/LCL/LCL526+1/Prover9---1109a.THM-Ref.s.out
+0   18
+1   15
+2   18
+3   17
+testing/TSTP/prover9/LCL/LCL533+1/Prover9---1109a.THM-Ref.s.out
+0   29
+1   27
+2   29
+testing/TSTP/prover9/LCL/LCL539+1/Prover9---1109a.THM-Ref.s.out
+0   18
+1   15
+2   18
+3   17
+testing/TSTP/prover9/LCL/LCL546+1/Prover9---1109a.THM-Ref.s.out
+0   29
+1   27
+2   29
+testing/TSTP/prover9/LDA/LDA002-1/Prover9---1109a.UNS-Ref.s.out
+0   15
+1   15
+2   13
+3   13
+testing/TSTP/prover9/MED/MED001+1/Prover9---1109a.THM-Ref.s.out
+0   15
+1   15
+2   13
+3   13
+testing/TSTP/prover9/MGT/MGT001+1/Prover9---1109a.THM-Ref.s.out
+1   9
+2   10
+3   10
+testing/TSTP/prover9/MGT/MGT001-1/Prover9---1109a.UNS-Ref.s.out
+1   9
+2   10
+3   10
+testing/TSTP/prover9/MGT/MGT053+1/Prover9---1109a.THM-Ref.s.out
+1   7
+2   10
+3   9
+testing/TSTP/prover9/MGT/MGT053-1/Prover9---1109a.UNS-Ref.s.out
+1   7
+2   10
+3   9
+testing/TSTP/prover9/MGT/MGT061+1/Prover9---1109a.THM-Ref.s.out
+0   25
+1   25
+2   24
+3   24
+testing/TSTP/prover9/MGT/MGT061-1/Prover9---1109a.UNS-Ref.s.out
+0   23
+1   23
+2   22
+3   22
+testing/TSTP/prover9/MGT/MGT062+1/Prover9---1109a.THM-Ref.s.out
+0   20
+1   20
+2   19
+3   19
+testing/TSTP/prover9/MGT/MGT062-1/Prover9---1109a.UNS-Ref.s.out
+0   18
+1   18
+2   17
+3   17
+testing/TSTP/prover9/MSC/MSC006-1/Prover9---1109a.UNS-Ref.s.out
+0   12
+1   12
+2   11
+3   11
+testing/TSTP/prover9/MSC/MSC012+1/Prover9---1109a.THM-Ref.s.out
+0   19
+1   19
+2   16
+testing/TSTP/prover9/NUM/NUM078-1/Prover9---1109a.UNS-Ref.s.out
+0   26
+1   26
+2   23
+testing/TSTP/prover9/NUM/NUM385+1/Prover9---1109a.THM-Ref.s.out
+0   15
+1   15
+2   15
+3   14
+testing/TSTP/prover9/PLA/PLA009-1/Prover9---1109a.UNS-Ref.s.out
+0   18
+1   18
+2   17
+3   17
+testing/TSTP/prover9/PLA/PLA009-2/Prover9---1109a.UNS-Ref.s.out
+0   18
+1   18
+2   17
+3   17
+testing/TSTP/prover9/PRO/PRO014+1/Prover9---1109a.THM-Ref.s.out
+0   34
+1   31
+testing/TSTP/prover9/PRO/PRO014+3/Prover9---1109a.THM-Ref.s.out
+1   24
+2   29
+testing/TSTP/prover9/PRO/PRO014+4/Prover9---1109a.THM-Ref.s.out
+0   41
+1   38
+testing/TSTP/prover9/PRO/PRO016+3/Prover9---1109a.THM-Ref.s.out
+0   23
+1   22
+2   23
+testing/TSTP/prover9/PRO/PRO017+2/Prover9---1109a.THM-Ref.s.out
+0   31
+1   30
+2   30
+testing/TSTP/prover9/PUZ/PUZ021-1/Prover9---1109a.UNS-Ref.s.out
+0   18
+1   18
+2   17
+3   17
+testing/TSTP/prover9/RNG/RNG001-1/Prover9---1109a.UNS-Ref.s.out
+0   30
+1   30
+2   29
+testing/TSTP/prover9/RNG/RNG001-2/Prover9---1109a.UNS-Ref.s.out
+0   29
+1   29
+2   28
+testing/TSTP/prover9/RNG/RNG001-3/Prover9---1109a.UNS-Ref.s.out
+0   18
+1   18
+2   17
+3   17
+testing/TSTP/prover9/RNG/RNG001-4/Prover9---1109a.UNS-Ref.s.out
+0   19
+1   19
+2   17
+3   17
+testing/TSTP/prover9/RNG/RNG004-3/Prover9---1109a.UNS-Ref.s.out
+0   25
+1   25
+2   24
+testing/TSTP/prover9/RNG/RNG006-3/Prover9---1109a.UNS-Ref.s.out
+0   29
+1   29
+2   28
+testing/TSTP/prover9/RNG/RNG025-1/Prover9---1109a.UNS-Ref.s.out
+1   17
+2   18
+3   18
+testing/TSTP/prover9/RNG/RNG029-3/Prover9---1109a.UNS-Ref.s.out
+0   43
+1   35
+testing/TSTP/prover9/RNG/RNG039-2/Prover9---1109a.UNS-Ref.s.out
+0   27
+1   27
+2   26
+testing/TSTP/prover9/ROB/ROB008-1/Prover9---1109a.UNS-Ref.s.out
+1   10
+2   11
+3   11
+testing/TSTP/prover9/SCT/SCT031-1/Prover9---1109a.UNS-Ref.s.out
+0   13
+1   12
+2   13
+3   13
+testing/TSTP/prover9/SCT/SCT080-1/Prover9---1109a.UNS-Ref.s.out
+0   22
+1   20
+2   22
+testing/TSTP/prover9/SCT/SCT123+1/Prover9---1109a.THM-Ref.s.out
+0   24
+1   23
+2   22
+testing/TSTP/prover9/SET/SET005-1/Prover9---1109a.UNS-Ref.s.out
+1   9
+2   12
+3   12
+testing/TSTP/prover9/SET/SET010-1/Prover9---1109a.UNS-Ref.s.out
+1   13
+2   16
+3   16
+testing/TSTP/prover9/SET/SET013-4/Prover9---1109a.UNS-Ref.s.out
+1   7
+2   8
+3   8
+testing/TSTP/prover9/SET/SET047+1/Prover9---1109a.THM-Ref.s.out
+0   10
+1   8
+2   10
+3   10
+testing/TSTP/prover9/SET/SET047-5/Prover9---1109a.UNS-Ref.s.out
+0   10
+1   8
+2   10
+3   10
+testing/TSTP/prover9/SET/SET130-6/Prover9---1109a.UNS-Ref.s.out
+1   12
+2   13
+3   13
+testing/TSTP/prover9/SET/SET138-6/Prover9---1109a.UNS-Ref.s.out
+1   12
+2   13
+3   13
+testing/TSTP/prover9/SET/SET146-6/Prover9---1109a.UNS-Ref.s.out
+0   19
+1   19
+2   16
+testing/TSTP/prover9/SET/SET188-6/Prover9---1109a.UNS-Ref.s.out
+0   24
+1   24
+2   22
+testing/TSTP/prover9/SET/SET189-6/Prover9---1109a.UNS-Ref.s.out
+0   25
+1   25
+2   23
+testing/TSTP/prover9/SET/SET205-6/Prover9---1109a.UNS-Ref.s.out
+0   23
+1   23
+2   21
+testing/TSTP/prover9/SET/SET206-6/Prover9---1109a.UNS-Ref.s.out
+0   23
+1   23
+2   21
+testing/TSTP/prover9/SET/SET247-6/Prover9---1109a.UNS-Ref.s.out
+0   27
+1   27
+2   24
+testing/TSTP/prover9/SET/SET347+4/Prover9---1109a.THM-Ref.s.out
+1   9
+2   10
+3   10
+testing/TSTP/prover9/SET/SET347-6/Prover9---1109a.UNS-Ref.s.out
+0   28
+1   28
+2   25
+testing/TSTP/prover9/SET/SET473-6/Prover9---1109a.UNS-Ref.s.out
+0   27
+1   27
+2   24
+testing/TSTP/prover9/SET/SET497-6/Prover9---1109a.UNS-Ref.s.out
+0   26
+1   26
+2   23
+testing/TSTP/prover9/SET/SET503-6/Prover9---1109a.UNS-Ref.s.out
+0   26
+1   26
+2   24
+testing/TSTP/prover9/SET/SET510-6/Prover9---1109a.UNS-Ref.s.out
+0   27
+1   27
+2   23
+testing/TSTP/prover9/SET/SET511-6/Prover9---1109a.UNS-Ref.s.out
+0   26
+1   26
+2   21
+testing/TSTP/prover9/SET/SET515-6/Prover9---1109a.UNS-Ref.s.out
+0   26
+1   26
+2   23
+testing/TSTP/prover9/SET/SET579+3/Prover9---1109a.THM-Ref.s.out
+1   13
+2   14
+3   14
+testing/TSTP/prover9/SET/SET602+4/Prover9---1109a.THM-Ref.s.out
+1   9
+2   10
+3   10
+testing/TSTP/prover9/SET/SET622+3/Prover9---1109a.THM-Ref.s.out
+0   13
+1   12
+2   13
+3   13
+testing/TSTP/prover9/SET/SET646+3/Prover9---1109a.THM-Ref.s.out
+0   27
+1   26
+testing/TSTP/prover9/SET/SET650+3/Prover9---1109a.THM-Ref.s.out
+1   23
+2   28
+testing/TSTP/prover9/SET/SET655+3/Prover9---1109a.THM-Ref.s.out
+0   34
+1   32
+testing/TSTP/prover9/SET/SET667+3/Prover9---1109a.THM-Ref.s.out
+0   27
+1   27
+2   26
+testing/TSTP/prover9/SET/SET788+1/Prover9---1109a.THM-Ref.s.out
+0   10
+1   8
+2   10
+3   10
+testing/TSTP/prover9/SET/SET821-2/Prover9---1109a.UNS-Ref.s.out
+0   16
+1   15
+2   16
+3   16
+testing/TSTP/prover9/SET/SET930+1/Prover9---1109a.THM-Ref.s.out
+0   22
+1   22
+2   20
+testing/TSTP/prover9/SET/SET935+1/Prover9---1109a.THM-Ref.s.out
+0   26
+1   26
+2   25
+testing/TSTP/prover9/SET/SET957+1/Prover9---1109a.THM-Ref.s.out
+1   11
+2   13
+3   13
+testing/TSTP/prover9/SET/SET959+1/Prover9---1109a.THM-Ref.s.out
+1   11
+2   12
+3   12
+testing/TSTP/prover9/SET/SET961+1/Prover9---1109a.THM-Ref.s.out
+0   19
+1   17
+2   19
+3   19
+testing/TSTP/prover9/SET/SET994+1/Prover9---1109a.THM-Ref.s.out
+0   29
+1   29
+2   27
+testing/TSTP/prover9/SEU/SEU129+1/Prover9---1109a.THM-Ref.s.out
+1   14
+2   15
+3   15
+testing/TSTP/prover9/SEU/SEU141+2/Prover9---1109a.THM-Ref.s.out
+0   23
+1   22
+2   23
+testing/TSTP/prover9/SEU/SEU149+2/Prover9---1109a.THM-Ref.s.out
+0   16
+1   16
+2   15
+3   15
+testing/TSTP/prover9/SEU/SEU155+2/Prover9---1109a.THM-Ref.s.out
+0   32
+1   31
+testing/TSTP/prover9/SEU/SEU156+1/Prover9---1109a.THM-Ref.s.out
+0   32
+1   32
+2   27
+testing/TSTP/prover9/SEU/SEU156+3/Prover9---1109a.THM-Ref.s.out
+0   32
+1   32
+2   27
+testing/TSTP/prover9/SEU/SEU169+2/Prover9---1109a.THM-Ref.s.out
+0   23
+1   22
+2   23
+3   23
+testing/TSTP/prover9/SEU/SEU171+2/Prover9---1109a.THM-Ref.s.out
+0   52
+1   51
+testing/TSTP/prover9/SEU/SEU180+2/Prover9---1109a.THM-Ref.s.out
+0   29
+1   28
+2   29
+testing/TSTP/prover9/SEU/SEU186+2/Prover9---1109a.THM-Ref.s.out
+0   26
+1   25
+2   25
+testing/TSTP/prover9/SEU/SEU187+2/Prover9---1109a.THM-Ref.s.out
+0   25
+1   24
+2   25
+testing/TSTP/prover9/SEU/SEU240+1/Prover9---1109a.THM-Ref.s.out
+0   22
+1   18
+2   22
+testing/TSTP/prover9/SEU/SEU241+1/Prover9---1109a.THM-Ref.s.out
+1   19
+2   21
+3   20
+testing/TSTP/prover9/SEU/SEU242+1/Prover9---1109a.THM-Ref.s.out
+1   19
+2   24
+3   21
+testing/TSTP/prover9/SEU/SEU271+1/Prover9---1109a.THM-Ref.s.out
+1   17
+2   18
+3   18
+testing/TSTP/prover9/SEU/SEU305+1/Prover9---1109a.THM-Ref.s.out
+1   8
+2   9
+3   9
+testing/TSTP/prover9/SEU/SEU339+1/Prover9---1109a.THM-Ref.s.out
+1   16
+2   17
+3   17
+testing/TSTP/prover9/SEU/SEU340+1/Prover9---1109a.THM-Ref.s.out
+0   21
+1   20
+2   21
+3   21
+testing/TSTP/prover9/SEU/SEU407+1/Prover9---1109a.THM-Ref.s.out
+1   13
+2   15
+3   15
+testing/TSTP/prover9/SEU/SEU408+1/Prover9---1109a.THM-Ref.s.out
+1   9
+2   11
+3   11
+testing/TSTP/prover9/SWB/SWB031+2/Prover9---1109a.UNS-Ref.s.out
+0   9
+1   9
+2   8
+3   8
+testing/TSTP/prover9/SWV/SWV249-2/Prover9---1109a.UNS-Ref.s.out
+0   24
+1   22
+2   24
+testing/TSTP/prover9/SWV/SWV251-2/Prover9---1109a.UNS-Ref.s.out
+0   15
+1   14
+2   15
+3   15
+testing/TSTP/prover9/SWV/SWV252-2/Prover9---1109a.UNS-Ref.s.out
+0   29
+1   27
+testing/TSTP/prover9/SWV/SWV275-2/Prover9---1109a.UNS-Ref.s.out
+0   13
+1   12
+2   13
+3   13
+testing/TSTP/prover9/SWV/SWV281-2/Prover9---1109a.UNS-Ref.s.out
+0   17
+1   17
+2   16
+testing/TSTP/prover9/SWV/SWV298-2/Prover9---1109a.UNS-Ref.s.out
+0   13
+1   12
+2   13
+testing/TSTP/prover9/SWV/SWV465+1/Prover9---1109a.THM-Ref.s.out
+0   24
+1   24
+2   23
+testing/TSTP/prover9/SWV/SWV476+1/Prover9---1109a.THM-Ref.s.out
+0   25
+1   25
+2   23
+testing/TSTP/prover9/SWV/SWV477+1/Prover9---1109a.THM-Ref.s.out
+0   25
+1   25
+2   23
+testing/TSTP/prover9/SWV/SWV478+1/Prover9---1109a.THM-Ref.s.out
+0   25
+1   25
+2   23
+testing/TSTP/prover9/SWV/SWV479+1/Prover9---1109a.THM-Ref.s.out
+0   22
+1   22
+2   21
+3   21
+testing/TSTP/prover9/SWV/SWV480+1/Prover9---1109a.THM-Ref.s.out
+0   22
+1   22
+2   21
+3   21
+testing/TSTP/prover9/SWV/SWV592-1/Prover9---1109a.UNS-Ref.s.out
+0   15
+1   13
+2   15
+3   15
+testing/TSTP/prover9/SWV/SWV731-1/Prover9---1109a.UNS-Ref.s.out
+0   23
+1   21
+2   21
+testing/TSTP/prover9/SWV/SWV742-1/Prover9---1109a.UNS-Ref.s.out
+0   34
+1   31
+testing/TSTP/prover9/SWV/SWV743-1/Prover9---1109a.UNS-Ref.s.out
+0   34
+1   31
+testing/TSTP/prover9/SWV/SWV749-1/Prover9---1109a.UNS-Ref.s.out
+1   23
+2   25
+3   25
+testing/TSTP/prover9/SWV/SWV750-1/Prover9---1109a.UNS-Ref.s.out
+1   23
+2   25
+3   25
+testing/TSTP/prover9/SWV/SWV751-1/Prover9---1109a.UNS-Ref.s.out
+0   31
+1   31
+2   27
+testing/TSTP/prover9/SWV/SWV752-1/Prover9---1109a.UNS-Ref.s.out
+0   28
+1   28
+2   26
+testing/TSTP/prover9/SWV/SWV753-1/Prover9---1109a.UNS-Ref.s.out
+0   28
+1   28
+2   26
+testing/TSTP/prover9/SWV/SWV754-1/Prover9---1109a.UNS-Ref.s.out
+1   23
+2   25
+3   25
+testing/TSTP/prover9/SWV/SWV757-1/Prover9---1109a.UNS-Ref.s.out
+0   33
+1   31
+testing/TSTP/prover9/SWV/SWV758-1/Prover9---1109a.UNS-Ref.s.out
+1   23
+2   25
+3   25
+testing/TSTP/prover9/SWV/SWV770-1/Prover9---1109a.UNS-Ref.s.out
+1   23
+2   25
+3   25
+testing/TSTP/prover9/SWV/SWV795-1/Prover9---1109a.UNS-Ref.s.out
+1   22
+2   23
+testing/TSTP/prover9/SWV/SWV796-1/Prover9---1109a.UNS-Ref.s.out
+1   22
+2   23
+testing/TSTP/prover9/SWV/SWV797-1/Prover9---1109a.UNS-Ref.s.out
+1   22
+2   23
+testing/TSTP/prover9/SWV/SWV798-1/Prover9---1109a.UNS-Ref.s.out
+1   22
+2   23
+testing/TSTP/prover9/SWW/SWW101+1/Prover9---1109a.THM-Ref.s.out
+0   29
+1   29
+2   25
+testing/TSTP/prover9/SWW/SWW198+1/Prover9---1109a.THM-Ref.s.out
+0   22
+1   22
+2   20
+3   20
+testing/TSTP/prover9/SWW/SWW410-1/Prover9---1109a.UNS-Ref.s.out
+0   17
+1   16
+2   17
+3   17
+testing/TSTP/prover9/SYN/SYN012-1/Prover9---1109a.UNS-Ref.s.out
+0   19
+1   16
+2   19
+testing/TSTP/prover9/SYN/SYN038-1/Prover9---1109a.UNS-Ref.s.out
+0   19
+1   16
+2   19
+testing/TSTP/prover9/SYN/SYN059+1/Prover9---1109a.THM-Ref.s.out
+0   7
+1   7
+2   6
+3   6
+testing/TSTP/prover9/SYN/SYN180-1/Prover9---1109a.UNS-Ref.s.out
+0   24
+1   24
+2   23
+3   23
+testing/TSTP/prover9/SYN/SYN311-1/Prover9---1109a.UNS-Ref.s.out
+1   16
+2   17
+3   17
+testing/TSTP/prover9/SYN/SYN312-1/Prover9---1109a.UNS-Ref.s.out
+1   12
+2   13
+3   13
+testing/TSTP/prover9/SYN/SYN334+1/Prover9---1109a.THM-Ref.s.out
+0   19
+1   16
+2   19
+testing/TSTP/prover9/SYN/SYN334-1/Prover9---1109a.UNS-Ref.s.out
+0   19
+1   16
+2   19
+testing/TSTP/prover9/SYN/SYN576-1/Prover9---1109a.UNS-Ref.s.out
+0   14
+1   13
+2   14
+3   14
+testing/TSTP/prover9/SYN/SYN577-1/Prover9---1109a.UNS-Ref.s.out
+0   13
+1   13
+2   12
+3   12
+testing/TSTP/prover9/SYN/SYN726+1/Prover9---1109a.THM-Ref.s.out
+0   12
+1   12
+2   11
+3   11
+testing/TSTP/prover9/SYN/SYN726-1/Prover9---1109a.UNS-Ref.s.out
+0   12
+1   12
+2   11
+3   11
+testing/TSTP/prover9/SYN/SYN918+1/Prover9---1109a.THM-Ref.s.out
+0   10
+1   10
+2   9
+3   9
+testing/veriT-SMT-LIB/QF_UF/SEQ/SEQ011_size2.smt2.proof_flat
+0   24
+2   21
+testing/veriT-SMT-LIB/QF_UF/eq_diamond/eq_diamond3.smt2.proof_flat
+0   12
+1   12
+2   11
+3   11
+testing/veriT-SMT-LIB/QF_UF/eq_diamond/eq_diamond4.smt2.proof_flat
+0   20
+1   19
+2   17
+3   16
+testing/veriT-SMT-LIB/QF_UF/eq_diamond/eq_diamond5.smt2.proof_flat
+0   30
+2   26
+Number of inconsistent results:  355

@@ -1,0 +1,221 @@
+---------- now starting ProofSeq/1 cut, 1 quantifier
+ok: 52
+parsing_timeout: 0
+parsing_out_of_memory: 0
+parsing_stack_overflow: 0
+parsing_other_exception: 0
+termex_timeout: 0
+delta_table_computation_timeout: 0
+grammar_finding_timeout: 4
+sol_timeout: 0
+prcons_timeout: 5
+cutintro_out_of_memory: 0
+cutintro_stack_overflow: 0
+cutintro_uncompressible: 11
+cutintro_ehs_unprovable: 0
+cutintro_other_exception: 1
+
+---------- now starting ProofSeq/1 cut, many quantifiers
+ok: 52
+parsing_timeout: 0
+parsing_out_of_memory: 0
+parsing_stack_overflow: 0
+parsing_other_exception: 0
+termex_timeout: 0
+delta_table_computation_timeout: 1
+grammar_finding_timeout: 3
+sol_timeout: 0
+prcons_timeout: 5
+cutintro_out_of_memory: 0
+cutintro_stack_overflow: 0
+cutintro_uncompressible: 11
+cutintro_ehs_unprovable: 0
+cutintro_other_exception: 1
+
+---------- now starting ProofSeq/many cuts (1), 1 quantifier
+ok: 111
+parsing_timeout: 0
+parsing_out_of_memory: 0
+parsing_stack_overflow: 0
+parsing_other_exception: 0
+termex_timeout: 0
+delta_table_computation_timeout: 0
+grammar_finding_timeout: 9
+sol_timeout: 0
+prcons_timeout: 0
+cutintro_out_of_memory: 0
+cutintro_stack_overflow: 0
+cutintro_uncompressible: 0
+cutintro_ehs_unprovable: 0
+cutintro_other_exception: 1
+
+---------- now starting ProofSeq/many cuts (2), 1 quantifier
+ok: 70
+parsing_timeout: 0
+parsing_out_of_memory: 0
+parsing_stack_overflow: 0
+parsing_other_exception: 0
+termex_timeout: 0
+delta_table_computation_timeout: 0
+grammar_finding_timeout: 9
+sol_timeout: 0
+prcons_timeout: 0
+cutintro_out_of_memory: 0
+cutintro_stack_overflow: 0
+cutintro_uncompressible: 0
+cutintro_ehs_unprovable: 0
+cutintro_other_exception: 1
+
+---------- now starting TSTP-Prover9/1 cut, 1 quantifier
+ok: 431
+parsing_timeout: 150
+parsing_out_of_memory: 0
+parsing_stack_overflow: 0
+parsing_other_exception: 0
+termex_timeout: 0
+delta_table_computation_timeout: 229
+grammar_finding_timeout: 47
+sol_timeout: 80
+prcons_timeout: 179
+cutintro_out_of_memory: 0
+cutintro_stack_overflow: 0
+cutintro_uncompressible: 1561
+cutintro_ehs_unprovable: 6
+cutintro_other_exception: 226
+
+---------- now starting TSTP-Prover9/1 cut, many quantifiers
+ok: 311
+parsing_timeout: 150
+parsing_out_of_memory: 0
+parsing_stack_overflow: 0
+parsing_other_exception: 0
+termex_timeout: 0
+delta_table_computation_timeout: 385
+grammar_finding_timeout: 12
+sol_timeout: 52
+prcons_timeout: 115
+cutintro_out_of_memory: 0
+cutintro_stack_overflow: 0
+cutintro_uncompressible: 1329
+cutintro_ehs_unprovable: 2
+cutintro_other_exception: 553
+
+---------- now starting TSTP-Prover9/many cuts (1), 1 quantifier
+ok: 2229
+parsing_timeout: 150
+parsing_out_of_memory: 0
+parsing_stack_overflow: 0
+parsing_other_exception: 0
+termex_timeout: 0
+delta_table_computation_timeout: 0
+grammar_finding_timeout: 526
+sol_timeout: 0
+prcons_timeout: 0
+cutintro_out_of_memory: 0
+cutintro_stack_overflow: 0
+cutintro_uncompressible: 0
+cutintro_ehs_unprovable: 0
+cutintro_other_exception: 4
+
+---------- now starting TSTP-Prover9/many cuts (2), 1 quantifier
+ok: 1976
+parsing_timeout: 150
+parsing_out_of_memory: 0
+parsing_stack_overflow: 0
+parsing_other_exception: 0
+termex_timeout: 0
+delta_table_computation_timeout: 0
+grammar_finding_timeout: 779
+sol_timeout: 0
+prcons_timeout: 0
+cutintro_out_of_memory: 0
+cutintro_stack_overflow: 0
+cutintro_uncompressible: 0
+cutintro_ehs_unprovable: 0
+cutintro_other_exception: 4
+
+---------- now starting SMT-LIB-QF_UF-veriT/1 cut, 1 quantifier
+ok: 2
+parsing_timeout: 1
+parsing_out_of_memory: 0
+parsing_stack_overflow: 0
+parsing_other_exception: 0
+termex_timeout: 0
+delta_table_computation_timeout: 35
+grammar_finding_timeout: 92
+sol_timeout: 4
+prcons_timeout: 6
+cutintro_out_of_memory: 0
+cutintro_stack_overflow: 0
+cutintro_uncompressible: 2
+cutintro_ehs_unprovable: 0
+cutintro_other_exception: 0
+
+---------- now starting SMT-LIB-QF_UF-veriT/1 cut, many quantifiers
+ok: 2
+parsing_timeout: 1
+parsing_out_of_memory: 0
+parsing_stack_overflow: 0
+parsing_other_exception: 0
+termex_timeout: 0
+delta_table_computation_timeout: 135
+grammar_finding_timeout: 1
+sol_timeout: 0
+prcons_timeout: 0
+cutintro_out_of_memory: 0
+cutintro_stack_overflow: 0
+cutintro_uncompressible: 2
+cutintro_ehs_unprovable: 0
+cutintro_other_exception: 1
+
+---------- now starting SMT-LIB-QF_UF-veriT/many cuts (1), 1 quantifier
+ok: 6
+parsing_timeout: 1
+parsing_out_of_memory: 0
+parsing_stack_overflow: 0
+parsing_other_exception: 0
+termex_timeout: 0
+delta_table_computation_timeout: 0
+grammar_finding_timeout: 134
+sol_timeout: 0
+prcons_timeout: 0
+cutintro_out_of_memory: 0
+cutintro_stack_overflow: 0
+cutintro_uncompressible: 0
+cutintro_ehs_unprovable: 0
+cutintro_other_exception: 1
+
+---------- now starting SMT-LIB-QF_UF-veriT/many cuts (2), 1 quantifier
+ok: 4
+parsing_timeout: 1
+parsing_out_of_memory: 0
+parsing_stack_overflow: 0
+parsing_other_exception: 0
+termex_timeout: 0
+delta_table_computation_timeout: 0
+grammar_finding_timeout: 136
+sol_timeout: 0
+prcons_timeout: 0
+cutintro_out_of_memory: 0
+cutintro_stack_overflow: 0
+cutintro_uncompressible: 0
+cutintro_ehs_unprovable: 0
+cutintro_other_exception: 1
+
+---------- TOTALS
+ok: 5246
+parsing_timeout: 604
+parsing_out_of_memory: 0
+parsing_stack_overflow: 0
+parsing_other_exception: 0
+termex_timeout: 0
+delta_table_computation_timeout: 785
+grammar_finding_timeout: 1752
+sol_timeout: 136
+prcons_timeout: 310
+cutintro_out_of_memory: 0
+cutintro_stack_overflow: 0
+cutintro_uncompressible: 2916
+cutintro_ehs_unprovable: 8
+cutintro_other_exception: 794
+
