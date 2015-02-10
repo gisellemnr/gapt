@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+  <appender name="console" class="org.apache.log4j.ConsoleAppender">
+    <param name="Target" value="System.out"/>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%-5p %c{1} - %m%n"/>
+    </layout>
+  </appender>
+
+  <appender name="nowhere" class="org.apache.log4j.varia.NullAppender"/>
+
+  <appender name="CutIntroDataLogFile" class="org.apache.log4j.FileAppender">
+    <param name="File" value="logs/CutIntroDataLog.txt"/>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%m%n"/>
+    </layout>
+  </appender>
+  
+  <appender name="EverythingElseLogFile" class="org.apache.log4j.FileAppender">
+    <param name="File" value="logs/EverythingElseLog.txt"/>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%-5p %c{1} - %m%n"/>
+    </layout>
+  </appender>
+ 
+  <!-- here are the loggers which were checked and are ok -->
+
+  <logger name="CutIntroDataLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="CutIntroDataLogFile"/>
+  </logger> 
+  
+  <logger name="IvyParserLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="console"/>
+  </logger> 
+  
+  <!-- here are the loggers which might be only generating noise  -->
+
+  <logger name="MacroRuleLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <logger name="merge$" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <logger name="DeltaTableLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <logger name="MiniSATLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <logger name="MiniSATProverLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <logger name="SolveLKLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+  
+  <logger name="EquationRuleLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <logger name="MinimizeSolutionLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <logger name="Prover9Logger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+  
+  <logger name="Prover9ProverLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <logger name="TPTPFOLExporterLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <logger name="SkolemizeLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <logger name="ProjectionsLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <logger name="CeresLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <logger name="DeltasLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <logger name="MinimalExpansionSequentsLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <logger name="LKtoLKskcLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <logger name="LLKLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <logger name="ReplayLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <logger name="PropositionalProofStrategyLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <logger name="ExpansionTreeProofStrategyLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <logger name="MaxSATLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <logger name="HOL2FOLLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <logger name="StopwatchLogger" additivity="false">
+    <level value="trace"/>
+    <appender-ref ref="nowhere"/>
+  </logger> 
+
+  <!-- Root will print to the console every logger that is not declared above 
+       with the flag 'additivity' set to false -->
+  <root>
+    <priority value ="trace" />
+    <!--appender-ref ref="EverythingElseLogFile" /-->
+    <appender-ref ref="nowhere" />
+    <!--appender-ref ref="console" /-->
+  </root>
+</log4j:configuration>
